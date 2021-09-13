@@ -1,0 +1,63 @@
+#                 A Catalogue of Constant Brightness Stars           (Henden 1997)
+# ================================================================================
+# Listed below are a set of stars with the following parameters:
+#     (1) they fall +-1.5 degrees of the celestial equator
+#     (2) 9.0 < R < 11.0 mag
+#     (3) constant in brightness
+#     (4) no companions to R=17 within 2arcmin
+# This is an extremely restricted set!  The coordinates are accurate to
+# +-50 milliarcseconds.  The four galactic plane fields in our survey
+# have been avoided, as there are no bright stars that meet the above
+# criteria.
+# You can reformat this and post it to your webpage.  I think it is a
+# good starting point, both for performing photometry and for test points
+# after performing the RA,DEC plate solution.
+# Arne Henden   (aah@nofs.navy.mil)      Feb 12, 1997
+#
+# Data Translation: Guillermo Andrade (gandrade@usermail.com).
+# ================================================================================
+#                               *** DISCLAIMER ***
+# No warranty of any kind or extent is made by  Clear Sky Institute Inc. or Elwood
+# Downey in regard of the accuracy, fidelity, integrity or fitness of the database
+# described in this document.The data contained in this file may be the product of
+# scientific and/or personal research, therefore  such information does not belong
+# to Clear Sky Institute Inc. nor to any of its personnel or associates.
+# The  distribution  and/or  storage of this file with commercial purposes, is not
+# allowed, except with permission of the author.
+# --------------------------------------------------------------------------------
+#               *** To be distributed with XEphem 3.6 version ***
+# ================================================================================
+A12010267,f|S|G9,0:33:07.5820,0:18:21.775,10.89,2000 #0.01
+A27010352,f|S|G9,0:33:31.3816,-1:14:14.478,9.87,2000 #0.02
+A07010398,f|S|G9,0:33:50.8448,0:31:21.415,9.97,2000 #0.01
+A17020010,f|S|G9,0:34:57.9701,-0:24:01.824,10.44,2000 #0.01
+A01020187,f|S|G9,0:35:19.0443,1:08:57.146,10.88,2000 #0.01
+A17030246,f|S|G9,0:39:35.1243,-0:09:45.350,9.87,2000 #0.01
+A17030400,f|S|G9,0:40:22.7460,-0:16:28.747,10.37,2000 #0.01
+A01040278,f|S|G9,0:42:53.7900,1:18:20.156,10.92,2000 #0.01
+A22040270,f|S|G9,0:43:09.6750,-0:36:23.344,10.77,2000 #0.00
+A22040480,f|S|G9,0:44:17.4749,-0:34:11.618,10.74,2000 #0.01
+A07070038,f|S|G9,0:52:04.1474,0:26:44.380,10.96,2000 #0.01
+A07070365,f|S|G9,0:54:03.6317,0:39:24.257,10.15,2000 #0.01
+A22080248,f|S|G9,0:56:34.4501,-0:34:27.569,10.70,2000 #0.01
+A32090040,f|S|G9,0:58:51.6849,-1:27:53.521,10.65,2000 #0.01
+B33050238,f|S|G9,1:37:45.0445,-1:16:59.263,10.16,2000 #0.01
+B33050273,f|S|G9,1:38:01.8855,-1:28:38.667,10.24,2000 #0.00
+C36040352,f|S|G9,3:35:38.7293,-1:24:29.330,10.70,2000 #0.01
+C25040621,f|S|G9,3:36:41.0386,-0:29:26.582,10.81,2000 #0.01
+C13050086,f|S|G9,3:37:30.1823,0:15:40.314,10.37,2000 #0.01
+C01050623,f|S|G9,3:39:07.7075,1:23:34.048,9.87,2000 #0.02
+C01080620,f|S|G9,3:49:08.4660,1:31:17.162,10.80,2000 #0.01
+C19090146,f|S|G9,3:51:15.7369,-0:15:54.311,9.98,2000 #0.03
+F38070874,f|S|G9,8:14:04.9801,-1:29:49.107,9.88,2000 #0.01
+G24080571,f|S|G9,10:26:40.5314,-0:33:36.780,10.23,2000 #0.01
+G24090506,f|S|G9,10:29:48.1192,-0:34:48.402,10.64,2000 #0.02
+H27050334,f|S|G9,11:07:07.1571,-0:28:00.918,10.06,2000 #0.01
+H33060308,f|S|G9,11:09:53.9022,-0:52:19.836,10.25,2000 #0.02
+H33080162,f|S|G9,11:16:16.1314,-1: 8:45.755,10.92,2000 #0.01
+H01090226,f|S|G9,11:19:42.3956,1:25:24.270,10.57,2000 #0.01
+I36030254,f|S|G9,12:31:28.9307,-1:11:06.824,10.68,2000 #0.01
+I01030277,f|S|G9,12:31:46.9671,0:52:00.899,10.57,2000 #0.01
+I20070612,f|S|G9,12:46:55.4513,-0: 5:56.000,10.99,2000 #0.03
+P01060268,f|S|G9,22:45:28.2338,1:24:00.423,10.98,2000 #0.01
+P18060665,f|S|G9,22:46:55.5826,-0:18:36.951,10.37,2000 #0.01

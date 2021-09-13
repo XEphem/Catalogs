@@ -1,0 +1,400 @@
+# Deepsky Objects Common Names Database (v. 1-1-2004)
+# ================================================================================
+# This is a simple collection of 'common' and not so  common designations for deep 
+# sky objects. 
+# Many of the entries  found in  this  list were taken from the superb compilation 
+# written by Mr. Hartmut Frommert  (A Collection of Some Common Names for Deep Sky 
+# Objects) which is to be found in the SEDS website (www.seds.org). The rest of it 
+# was  found  among several books and  references coming from different sites over 
+# the Internet.
+# This is by no means a thorough list or a scientifically validated one. We do not
+# pretend  to  stablish  any  standards  in  the  current  naming  conventions  or 
+# traditions.
+# We  recognize  the  efforts  of many  capable enthusiasts who have been 
+# interested  in  recording  and  listing  many of this astronomical 'aliases' for 
+# objects  which  ( otherwise )  would  be referred simply within the bound of the
+# rules of  nomenclature recommended  by  the  IAU,  or by  the scope of the given
+# reseach.
+# Having  a  list  of  this  sort in XEphem just makes it a little more exotic and
+# perhaps a bit more interesting that it already is...
+# I hope you find it as a nice complement for your printed charts!
+#
+# Keep in mind that this list also contains some  names referring  to  obscure and 
+# little known catalogs we found convenient to include to help the Gallery.
+#  
+# The following text was taken directly from Mr. Frommert collection page:
+# ---------------------------------------------------------------------------
+# A Collection of Some Common Names for Deep Sky Objects
+#
+#         Compiled by Hartmut Frommert <spider@seds.org>
+#   Also look at our List of Common Names for Messier Objects:
+#         http://www.seds.org/messier/m-names.html
+#         ftp://ftp.seds.org/pub/info/messier/m-names.txt
+#
+#   You are invited to email me additional names for deep sky objects !
+#
+#   Deep Sky Objects are often referred to by their entries in catalogs;
+#   see our List of Common Deep Sky Catalogs at
+#         http://www.seds.org/messier/xtra/supp/cats.html
+#
+# References and Links
+#     * List of Common Names for Messier Objects: 
+#         http://www.seds.org/messier/m-names.html
+#         ftp://ftp.seds.org/pub/info/messier/m-names.txt
+#     * List of Common Names for NGC and IC Objects from the NGC 2000.0,
+#       edited by R.W. Sinnott, Sky Publishing 1988
+#     * Glossary of Selected Astronomical Names in the Sky Catalog 2000.0
+#       by A. Hirshfeld and R.W. Sinnott, Sky Publishing 1985
+#     * List of Galaxies with proper names (RASC Observer's Handbook 1996)
+#     * Various issues of the German interstellarum magazine
+#     * The Deep Sky List was published by the Deep Sky Group of the German
+#       Vereinigung der Sternfreunde
+#     * Images of some of the objects listed here are linked in
+#         http://www.seds.org/messier/xtra/supp/d-n-images.html
+#       
+#   Thanks to all contributors, in particular Bill Arnett for helpful 
+#   suggestions and discussion, and to Arnaldo Arnal for numerous 
+#   contributions.
+#   Hartmut Frommert (spider@seds.org)
+#   Christine Kronberg (smil@agleia.de)
+# ---------------------------------------------------------------------------
+# Main Original Source: Hartmut Frommert (spider@seds.org)
+#                       Christine Kronberg (smil@agleia.de)
+# ================================================================================
+#                               *** DISCLAIMER ***
+# No warranty of any kind or extent is made by  Clear Sky Institute Inc. or Elwood
+# Downey in regard of the accuracy, fidelity, integrity or fitness of the database
+# described in this document. The data contained in  this  file may the product of
+# scientific and/or personal research, therefore  such information does not belong
+# to Clear Sky Institute Inc. nor to any of its personnel or associates.
+# The  distribution  and/or  storage of this file with commercial purposes, is not
+# allowed, except with permission of the author.
+# --------------------------------------------------------------------------------
+#          *** To be distributed with XEphem 3.6 commercial version ***
+# ================================================================================
+Reinmuth 80,f|G|SB,12:32:28.1,0:23:25,12,2000,240|156|30
+30 Doradus,f|N,5:38:38.4,-69:5:39,5,2000,1800
+47 Tucanae,f|C,0:24:5.2,-72:4:49,4,2000,3000
+Al Sufi Cluster,f|O,19:25:24,20:11,3.6,2000,8400|3000|90
+Ambartsumian's Knot,f|G,11:11:13.2,28:41:48,13.8,2000,48
+Andromeda Nebula,f|G,0:42:44.3,41:16:8,3.5,2000,11346|3702|35
+Anon Platais,f|O,21:30:0,48:59:00,15.5,2000,100|100|90
+Antares Nebula,f|F,16:31:36,-26:3:0,10,2000,3600 # IC 4606
+Antennae A,f|G,12:1:52.8,-18:51:52,10.3,2000,204|102|94
+Antennae B,f|G,12:1:53.8,-18:53:8,10.4,2000,198|102|55
+Ant Galaxy,f|G,10:56:48,+6:53:0,14.63,2000,56|40|60
+Antlia Dwarf,f|G,10:04:6,-27:20:0,15.5,2000,100|100|90
+Ant Nebula,f|P,16:17:12,-51:59,13.8,2000 # PK 331- 1.1
+Arp 105,f|A,11:10:48,28:40:0,14.3,2000,100   # Abell 1185
+Arp 220,f|G,15:34:57.2,23:30:9,13.4,2000,108|102|144 # IC 1127
+Arp's Galaxy,f|G,11:09:36,51:30:0,15.5,2000,100|100|90
+Atom for Peace,f|G,22:20:44.8,-24:40:42,11.1,2000,126|102|119
+Barnard's Galaxy,f|C,19:44:56.6,-14:48:23,8.7,2000,924|852|5
+Bear Claw Galaxy,f|G,8:13:14.4,45:59:29,11.7,2000,102|90|162
+Beehive Cluster|Praesepe,f|C,8:39:57.2,19:40:21,3.1,2000,4200
+Black Eye Galaxy,f|G,12:56:43.8,21:40:59,8.5,2000,600|324|115
+Blinking Planetary,f|P,19:44:48.2,50:31:32,8.8,2000,36
+Blue Flash Nebula,f|P,20:22:23,20:6:18,11.1,2000,72
+Blue Planetary,f|P,11:50:17.8,-57:10:55,8.1,2000,23
+Blue Snowball,f|P,23:25:53.9,42:32:8,8.3,2000,37
+Bode's Nebula|Cigar Galaxy,f|G,9:55:54,69:40:59,8.6,2000,672|258|65
+Box A,f|G,12:12:18.7,29:10:46,12.2,2000,108|54|153
+Box B,f|G,12:12:21.5,29:12:26,12.7,2000,300|42|134
+Box C,f|G,12:12:26.9,29:8:57,13.5,2000,48|18|50
+Box D,f|G,12:12:31,29:10:7,13.4,2000,108|24|130
+Box Nebula,f|P,17:14:4.3,-12:54:37,11.5,2000,19
+Bubble Nebula,f|N,23:20:45,61:12:42,11,2000,900
+Bug Nebula,f|P,17:13:44.1,-37:6:12,9.6,2000,89
+Butterfly Cluster,f|C,17:40:17,-32:16:0,4.2,2000,1980
+California Nebula,f|N,4:3:14.4,36:21:33,5,2000,9600
+Carafe Group A,f|H,4:28:21.6,-47:48:55,12.7,2000,78|54|17
+Carafe Group B,f|G,4:28:33.4,-47:46:57,13.1,2000,84|48|123
+Cat Eye Neblula,f|P,17:58:33.4,66:38:1,8.1,2000,20
+Cave Nebula,f|N,22:56:48,62:37:00,15.99,2000,100 # C 9
+Centaurus A,f|G,13:25:29,-43:0:58,6.6,2000,1542|1200|35
+Cetus A,f|G,2:42:40.8,-0:0:46,8.9,2000,426|360|70
+Chi Persei|Double Cluster B,f|C,2:22:32,57:8:39,6.1,2000,1080
+Circinus Spiral,f|G,14:13:12,-65:20:00,13.8,2000,192|75|40
+Cocoon Nebula,f|N,21:53:24,47:16:0,15.99,2000,600
+Coddington Nebula,f|G,10:28:22.4,68:25:0,10.2,2000,792|324|41
+Coma I,f|A,12:59:48,27:58:0,13.5,2000,100    # Abell 1656
+Conus Nebula,f|C,6:40:58.2,9:53:44,4.1,2000,2400
+Copeland Septett A,f|H,11:37:44.5,22:1:16,15.2,2000,24|12|102
+Copeland Septett B,f|G,11:37:43.6,22:0:35,14,2000,66|30|126
+Copeland Septett C,f|G,11:37:49.1,22:1:35,14.8,2000,42|24|132
+Copeland Septett D,f|H,11:37:51.6,21:58:29,13.9,2000,30|24|132
+Copeland Septett E,f|H,11:37:53.9,21:56:13,14.3,2000,30|12|9
+Copeland Septett F,f|G,11:37:53.8,21:58:53,13.7,2000,102|30|117
+Copeland Septett G,f|G,11:37:55,21:59:8,14.3,2000,24|18|18
+Crab Nebula,f|R,5:34:31.9,22:0:52,8.4,2000,360
+Crescent Nebula,f|N,20:12:6.5,38:21:18,10,2000,1080
+de Mairan's Nebula,f|N,5:35:31.3,-5:16:3,9,2000,1200
+Djorgovsky 3,f|C,18:6:8.6,-27:45:53,14.6,2000,90
+Draco Dwarf,f|G,17:20:12,+57:54:55,10.9,2000,2129
+Dragonfly Cluster ,f|C,1:19:32.6,58:17:27,6.4,2000,1200
+Dumbbell Nebula,f|P,19:59:36.3,22:43:18,7.4,2000,402
+Eagle Nebula,f|C,18:18:48,-13:47:50,6,2000,480
+East Veil Nebula A,f|R,20:56:24,31:43:0,7,2000,3600
+East Veil Nebula B,f|R,20:57:6,31:13:0,7,2000,720
+Eight-burst Nebula,f|P,10:7:1.8,-40:26:10,9.2,2000,88
+Elephant Trunk A,f|N,21:35:30,57:23:0,15.99,2000,840
+Elephant Trunk B,f|N,21:34:30,57:28:0,15.99,2000,720
+Eps-Ori Nebula,f|S,5:36:12.8,-1:12:5,15.99,2000,3000
+Eskimo Nebula,f|P,7:29:10.8,20:54:45,9.1,2000,54
+Eta Carinae Nebula,f|N,10:43:50,-59:52:0,3,2000,7200
+Fath 703,f|G,15:13:48.1,-15:27:51,12,2000,216|174|105
+Flame Nebula,f|N,5:41:42.5,-1:50:43,15.99,2000,1800
+Flaming Star Nebula,f|N,5:16:29.4,34:21:22,10,2000,1800
+Fornax A,f|G,3:22:41.4,-37:12:28,8.4,2000,660|432|50
+Gamma Cas Nebula A,f|N,0:57:28.5,61:8:37,15.99,2000,600
+Gamma Cas Nebula B,f|N,0:59:29,60:54:40,15.99,2000,600
+Gamma Cyg Nebula,f|N,20:22:12,40:15:24,15.99,2000,3000
+Gem Cluster,f|C,10:35:48.7,-58:13:28,4.7,2000,300
+Ghost Head Nebula,f|N,5:39:44.2,-69:38:44,15.99,2000
+Ghost of Jupiter,f|P,10:24:46.1,-18:38:31,7.7,2000,64
+Grus Quartett A,f|G,23:18:23.5,-42:22:11,10.5,2000,300|138|157
+Grus Quartett B,f|G,23:16:10.6,-42:35:5,10.6,2000,204|162|1
+Grus Quartett C,f|G,23:18:54.6,-42:14:21,11.3,2000,156|60|36
+Grus Quartett D,f|G,23:19:20.8,-42:15:29,11.5,2000,264|84|57
+Heart Nebula|Melotte 15,f|C,2:32:41.4,61:27:25,6.5,2000,1200
+Helix,f|H,9:23:30.2,-23:9:41,11.5,2000,150|108|162
+Helix Nebula,f|P,22:29:38.4,-20:50:11,7.3,2000,1054
+Henize 115-N13,f|N,0:45:24,-73:22:49,15.99,2000,60
+Henize 115-N66,f|U,0:59:5,-72:10:38,10.3,2000,312
+Henize 115-N83AB,f|N,1:13:48.3,-73:17:13,15.99,2000,900
+Henize 115-N84A,f|U,1:14:37.6,-73:17:18,12.5,2000,60
+Henize 115-N90,f|N,1:29:26.4,-73:33:26,15.99,2000,2040
+Henize 120-N11A,f|N,4:56:49.2,-66:24:33,15.99,2000,300
+Henize 120-N4A,f|U,4:52:8.4,-66:55:32,15.99,2000,72
+Henize 120-N4B,f|N,4:52:10.5,-66:54:32,15.99,2000
+Henize 120-N8,f|N,4:53:1.6,-68:3:12,15.99,2000
+Henize 1-3,f|P,19:48:30,22:09,15.99,2000,8
+Henize 1-4,f|P,19:59:18,31:55,13.3,2000,22
+Henize 1-5,f|P,20:11:54,20:19,16,2000,28.8
+Henize 1-6,f|P,20:17:18,25:22,14,2000,18|13
+Henize 2-102,f|P,13:58:12,-58:55,14.2,2000,9
+Henize 2-103,f|P,14:05:30,-64:41,13.9,2000,20
+Henize 2-105,f|P,14:15:30,-74:13,12,2000,35
+Henize 2-107,f|P,14:18:42,-63:07,16,2000,11
+Henize 2-108,f|P,14:18:12,-52:11,10.1,2000,12
+Henize 2-109,f|P,14:20:48,-55:28,13.6,2000,9
+Henize 2-10,f|G,09:36:12,-26:24,15.99,2000,12
+Henize 2-111,f|P,14:33:18,-60:50,13,2000,30
+Henize 2-112,f|P,14:40:30,-52:35,14.7,2000,8
+Henize 2-114,f|P,15:04:6,-60:53,11.1,2000,30|24
+Henize 2-116,f|P,15:06:0,-61:22,10.6,2000,45
+Henize 2-117,f|P,15:06:0,-56:00,15.99,2000,5
+Henize 2-118,f|P,15:06:12,-43:01,12.7,2000
+Henize 2-11,f|P,08:37:6,-39:26,14.5,2000,65
+Henize 2-120,f|P,15:12:0,-55:40,14.2,2000,30
+Henize 2-123,f|P,15:22:18,-54:09,15.1,2000
+Henize 2-128,f|P,15:25:6,-51:20,14.4,2000
+Henize 2-129,f|P,15:25:36,-52:51,14.9,2000
+Henize 2-131,f|P,15:37:12,-71:55,11.8,2000,4|9
+Henize 2-132,f|P,15:38:0,-58:45,14.6,2000
+Henize 2-133,f|P,15:41:54,-56:37,16.4,2000
+Henize 2-136,f|P,15:52:18,-62:31,12.5,2000
+Henize 2-138,f|G,15:56:0,-66:10,13.3,2000,12
+Henize 2-140,f|P,15:58:6,-55:42,17.1,2000,5|2
+Henize 2-141,f|P,15:59:6,-58:24,12.4,2000
+Henize 2-142,f|P,16:00:0,-55:56,15.9,2000,|2
+Henize 2-143,f|P,16:01:6,-55:06,15.4,2000,7|4
+Henize 2-145,f|P,16:09:0,-51:02,15.99,2000,25
+Henize 2-146,f|P,16:10:42,-54:57,14.2,2000,24|20
+Henize 2-152,f|P,16:15:18,-49:14,13.7,2000,13|10
+Henize 2-153,f|P,16:17:12,-53:32,14.1,2000,14|12
+Henize 2-159,f|P,16:24:18,-54:36,13.9,2000,16|8
+Henize 2-15,f|P,08:53:30,-40:04,13,2000,20
+Henize 2-163,f|P,16:29:36,-59:09,13.9,2000,22|18
+Henize 2-164,f|P,16:29:54,-53:23,13.7,2000,16
+Henize 2-165,f|P,16:30:0,-54:10,13.7,2000,54|45
+Henize 2-169,f|P,16:34:18,-49:21,17.4,2000,25
+Henize 2-175,f|P,16:39:30,-36:35,15,2000,11|4
+Henize 2-185,f|P,17:01:18,-70:07,15.99,2000,10
+Henize 2-186,f|P,16:59:36,-51:42,13.3,2000,3
+Henize 2-18,f|P,09:08:48,-53:19,14.3,2000,12|10
+Henize 2-198,f|P,17:06:24,-44:13,13,2000,25|15
+Henize 2-207,f|P,17:19:30,-45:53,12,2000,40|26
+Henize 2-21,f|P,09:13:54,-55:28,13.5,2000,10
+Henize 2-250,f|P,17:34:54,-26:36,14.1,2000,5.8
+Henize 2-262,f|P,17:40:12,-26:45,15,2000,10
+Henize 2-269,f|G,17:47:6,-64:38,15.99,2000,12
+Henize 2-270,f|P,17:38:54,-18:18,11,2000,10
+Henize 2-275,f|P,17:02:18,-33:10,13,2000,10
+Henize 2-28,f|P,09:22:6,-54:09,14.4,2000,11|9
+Henize 2-29,f|P,09:24:48,-54:36,13.3,2000,20
+Henize 2-32,f|P,09:30:54,-57:36,12.4,2000,40
+Henize 2-36,f|P,09:43:30,-57:17,10.4,2000,25
+Henize 2-37,f|P,09:47:30,-48:58,14,2000,30
+Henize 2-39,f|P,10:03:54,-60:45,12.8,2000,10
+Henize 2-418,f|P,18:44:18,-30:19,14,2000,13
+Henize 2-429,f|P,19:13:36,14:59,14.3,2000,4.4|4
+Henize 2-430,f|P,19:14:0,17:31,15,2000,10
+Henize 2-432,f|P,19:23:30,21:08,15.5,2000,10
+Henize 2-434,f|P,19:33:48,-74:33,12.2,2000,8
+Henize 2-437,f|P,19:32:54,26:53,16.6,2000,15.5|3
+Henize 2-446,f|P,19:44:6,23:27,15.99,2000,5
+Henize 2-50,f|P,10:34:18,-53:41,14.7,2000,9
+Henize 2-51,f|P,10:35:48,-64:19,14.2,2000,12|7
+Henize 2-53,f|P,10:39:36,-57:07,13.9,2000,5
+Henize 2-55,f|P,10:48:48,-56:03,12.7,2000,18
+Henize 2-58,f|N,10:56:12,-60:27,11,2000,35
+Henize 2-5,f|P,07:47:24,-51:16,12.3,2000,10
+Henize 2-63,f|P,11:23:54,-52:52,14.7,2000,10
+Henize 2-64,f|P,11:27:24,-57:18,14.1,2000,9
+Henize 2-67,f|P,11:28:48,-60:07,13.8,2000,5
+Henize 2-70,f|P,11:35:12,-60:17,12,2000,45|27
+Henize 2-71,f|P,11:39:12,-68:52,14.8,2000,5
+Henize 2-72,f|P,11:41:42,-62:29,14.7,2000,65
+Henize 2-73,f|P,11:48:36,-65:08,12.9,2000,5
+Henize 2-76,f|P,12:08:24,-64:12,12.4,2000,16
+Henize 2-77,f|N,12:09:0,-63:16,11,2000,13|8
+Henize 2-78,f|P,12:09:12,-58:43,17.6,2000,5
+Henize 2-7,f|P,08:11:30,-48:43,12.4,2000,25
+Henize 2-83,f|P,12:28:42,-62:06,12.9,2000,6|5
+Henize 2-84,f|P,12:28:48,-63:44,11.7,2000,34|23
+Henize 2-85,f|P,12:30:12,-63:53,13.8,2000,10
+Henize 2-86,f|P,12:30:24,-64:52,14.2,2000,5
+Henize 2-90,f|P,13:09:36,-61:20,13.7,2000,10
+Henize 2-96,f|P,13:42:36,-61:23,14.4,2000,10
+Henize 2-97,f|P,13:45:24,-71:29,12.6,2000,5
+Henize 2-99,f|P,13:52:24,-66:23,16.1,2000,25
+Henize 2-9 ,f|P,08:28:30,-39:24,14.4,2000,5
+Henize 44,f|N,5:22:8,-67:56:15,15.99,2000,1380|960
+Henize 55,f|U,5:32:19.9,-67:41:24,15.99,2000,108
+Henize 70,f|N,5:43:25,-67:51:12,15.99,2000,468|438
+Henize 959,f|K,14:3:18.2,-41:23:13,15.99,2000,9
+Hercules Cluster,f|C,16:41:41.5,36:27:39,5.8,2000,1200
+Herschel's Ray,f|N,9:0:17,-45:56:53,15.99,2000,1200
+Hind's Variable Nebula,f|F,4:21:56.7,19:32:4,15.99,2000,30
+Hole in a Cluster,f|C,19:37:18,46:22:55,6.8,2000,900
+Holmberg IV,f|G,13:54:45,+53:54:17,13.7,2000,256|79|18
+Horsehead Nebula,f|N,5:41:0,-2:26:40,11,2000,3600
+h Persei|Double Cluster A,f|C,2:19:3.7,57:8:6,5.3,2000,1080
+Hubble's Variable Nebula,f|N,6:39:9.5,8:44:40,15.99,2000,180
+Hydra I,f|A,10:36:54,-27:31:0,12.7,2000,100  # Abell 1060
+Intergalactic Wanderer,f|C,7:38:8.5,38:52:57,10.3,2000,276
+Jewel Box,f|C,12:53:37,-60:21:22,4.2,2000,600
+Keenan's System A,f|H,13:32:7.1,62:42:3,12.6,2000,108|72|28
+Keenan's System B,f|G,13:32:10.2,62:46:5,12.3,2000,108|78|100
+Kidney Bean Galaxy,f|G,12:53:6.6,36:49:8,14.3,2000,36|24|90
+Lagoon Nebula,f|N,18:3:48,-24:23:0,5,2000,2700
+Little Dumbbell,f|P,1:42:18.1,51:34:17,10.1,2000,195
+Little Gem,f|P,19:43:57.8,-14:9:9,9.3,2000,46
+Little Ghost Nebula,f|P,17:29:20.4,-23:45:33,11.4,2000,38
+M1-67,f|P,19:11:30,16:52,15.5,2000,57
+Markarian A,f|H,12:25:3.6,12:53:13,9.2,2000,390|336|135
+Markarian B,f|H,12:26:11.5,12:56:47,8.9,2000,534|348|130
+Markarian C,f|G,12:27:40.5,13:4:47,10.8,2000,180|132|13
+Markarian D,f|G,12:27:45.6,13:0:31,10,2000,510|180|27
+Markarian E,f|H,12:28:57.7,13:14:32,11.8,2000,96|90|45
+Markarian F,f|G,12:29:2.9,13:11:4,11.1,2000,204|84|9
+Markarian G,f|H,12:29:48.7,13:25:47,10.2,2000,270|150|94
+Markarian H,f|G,12:30:2,13:38:13,10.4,2000,222|198|9
+Menzel 1,f|P,15:34:12,-59:09,12.5,2000,50
+Menzel 3,f|P,16:17:12,-51:59,13.8,2000,35|16
+Mexican Jumping Star,f|C,7:18:41.4,-24:57:15,3.8,2000,360
+Milky Way Patch,f|F,18:16:56,-18:30:53,4.6,2000,5400
+Miniature Spiral,f|H,11:51:47.6,48:40:59,12.2,2000,90
+Mini Hyades,f|G,7:29:24.9,72:7:43,13.3,2000,48|42|0
+Mini Sombrero,f|G,13:59:50.9,38:10:55,13.7,2000,186|42|145
+Mirach's Ghost,f|H,1:9:26.9,35:43:6,10,2000,210
+Molecular Cloud,f|F,6:48:39,-16:54:4,13,2000,36|24|175
+M Spindle Galaxy,f|G,15:6:29.4,55:45:49,9.9,2000,390|186|128
+N 30B,f|U,05:13:48,-67:27:17,15.99,2000,27|24
+N 81,f|N,01:09:12,-73:11:42,15.99,2000,48|39
+North America Nebula,f|N,20:58:50,44:31:0,4,2000,7200
+Nova Aql 1899,f|S,19:20:24,-0:8:0,15.99,2000
+Nova Cygni 1876,f|M,21:41:44,42:50:31,15.99,2000
+Nubecula Minor,f|G,0:48:47.1,31:57:27,13.1,2000,66
+Omega Centauri,f|O,13:26:47,-47:28:51,3.9,2000,3300
+Omega Nebula,f|N,18:20:48,-16:11:0,6,2000,1200
+Omi Vel Cluster,f|C,8:40:18,-52:55:0,2.6,2000,3600
+Orion Nebula,f|N,5:35:17.1,-5:23:25,4,2000,3900
+Owl Nebula,f|P,11:14:47.7,55:1:10,9.9,2000,170
+Pacman Nebula,f|N,0:52:59.3,56:37:19,15.99,2000,2100
+Pancake,f|H,8:54:58.8,49:8:33,15.2,2000,30|18|54
+Papillon,f|H,11:33:59.1,49:3:44,13,2000,84|54|174
+Pegasus Dwarf,f|G,23:28:34,+14:44:48,14.3,2000,301|161|120
+Pelican Nebula A,f|N,20:50:48,44:21:0,8,2000,1500
+Pelican Nebula B,f|N,20:50:48,44:11:0,8,2000,3600
+Perek 1-6,f|P,16:23:54,-46:42,16.1,2000,14|11
+Perseus A,f|G,3:19:48.1,41:30:41,11.7,2000,138|96|110
+Pinwheel Cluster,f|C,5:36:17.7,34:8:27,6,2000,600
+Pinwheel Galaxy|Triangulum Galaxy,f|G,1:33:51.9,30:39:29,5.5,2000,4122|2496|23
+Pl. Nebula (Maia),f|F,3:45:49.5,24:22:6,15.99,2000,1560
+Pl. Nebula (Merope),f|F,3:46:10,23:45:24,15.99,2000,1800
+Polarissima Australis,f|G,1:41:53.2,-89:20:3,13.4,2000,114|42|85
+Polarissima Borealis,f|G,11:47:14.5,89:5:37,14.4,2000,60|42|39
+Ptolemy's Cluster,f|C,17:53:46,-34:47:0,3.3,2000,4500
+Retina Nebula,f|P,14:22:26.4,-44:9:2,10.2,2000,106
+Rho Ophiuchi Nebula,f|F,16:25:35,-23:27:0,15.99,2000,3600
+Ring Nebula,f|P,18:53:35.1,33:1:47,8.8,2000,180|144|55
+Rosette Nebula A,f|N,6:30:54.6,5:2:52,15.99,2000,4800
+Rosette Nebula B,f|N,6:30:40.3,5:0:47,6,2000,4800
+Rosette Nebula C,f|C,6:31:55.5,4:56:35,4.8,2000,1440
+Rosette Nebula D,f|N,6:32:33.7,5:7:42,15.99,2000
+Salt and Pepper,f|C,23:24:50.5,61:36:23,6.9,2000,960
+Satellite Galaxy A,f|H,0:40:22.1,41:41:7,7.9,2000,1170|690|170
+Satellite Galaxy B,f|H,0:42:41.8,40:51:57,8.1,2000,510|390|179
+Saturn Nebula,f|P,21:4:10.8,-11:21:47,8,2000,35
+Sculptor Galaxy,f|G,0:47:33.1,-25:17:15,7.3,2000,1740|408|52
+Seagull Nebula,f|N,7:5:18,-10:38:0,15.99,2000,7200
+Seashell Galaxy,f|G,13:47:23.1,-30:25:2,14.7,2000,48|24|60
+Sextans B Dwarf,f|G,9:59:59,+5:19:57,11.4,2000,308|213|110
+Seyfert Sextett A*,f|G,15:59:11.2,20:45:20,13.8,2000,42|30|75
+Seyfert Sextett B*,f|G,15:59:10.9,20:45:45,14.2,2000,24|18|42
+Seyfert Sextett C*,f|G,15:59:11.8,20:44:52,15.3,2000,30|12|0
+Seyfert Sextett D*,f|G,15:59:13,20:45:37,15.4,2000,12
+Seyfert Sextett E,f|G,15:59:12.5,20:45:50,13.2,2000,60|42|84
+Shapley 1,f|P,15:51:42,-51:31,13.6,2000,76
+Siamese Twin A,f|G,12:36:32.7,11:15:28,11.3,2000,186|132|85
+Siamese Twin B,f|G,12:36:34.2,11:14:19,10.9,2000,276|132|23
+Silver Dollar,f|G,0:47:33.1,-25:17:15,7.3,2000,1740|408|52
+S. M. Cloud,f|G,0:52:40,-72:48:34,2.2,2000,19146|12306|45
+Sombrero Galaxy,f|G,12:39:59.3,-11:37:21,8.3,2000,516|252|89
+Sothern Pinwheel Galaxy,f|G,13:37:0.2,-29:52:2,7.5,2000,774|690|44
+Southern Integral Sign,f|G,22:14:44.5,-69:21:57,14.5,2000,84|18|73
+Southern Pleiades,f|C,10:42:56.5,-64:23:39,1.6,2000,6000
+Spindle,f|H,8:54:58.8,49:8:33,15.2,2000,30|18|54
+Spindle Galaxy,f|H,10:5:14.1,-7:43:5,9.1,2000,432|144|40
+Spiral Cluster,f|C,2:42:5,42:45:42,5.2,2000,1500
+Spirograph Nebula,f|P,5:27:28.3,-12:41:48,9.3,2000,12
+Starfish Cluster,f|C,5:28:42.4,35:51:18,6.4,2000,900
+Starfish Cluster,f|U,5:19:50,-69:30:0,11.5,2000,30
+Starqueen Nebula,f|N,18:18:36,-13:58:0,15.99,2000,2100
+Stephan's Quintet A,f|H,22:35:51.9,33:56:43,13.6,2000,24
+Stephan's Quintet B,f|H,22:35:56.7,33:57:58,13.4,2000,72|60|5
+Stephan's Quintet C,f|G,22:35:58.3,33:58:0,13.2,2000,96|66|99
+Stephan's Quintet D,f|G,22:36:3.5,33:58:35,13.3,2000,84|66|52
+Stephan's Quintet E,f|G,22:36:3.5,33:56:54,12.5,2000,132|66|132
+Struve's Lost Nebula,f|S,4:21:43.5,19:31:16,15.99,2000
+Sunflower Galaxy,f|G,13:15:49,42:1:59,8.5,2000,756|432|105
+Superwind Galaxy,f|G,12:45:8.2,-0:27:46,10.8,2000,270|84|42
+Thackeray's Globules,f|N,11:37:53.3,-63:21:13,4.5,2000,2100
+The Eyes A,f|G,12:27:40.5,13:4:47,10.8,2000,180|132|13
+The Eyes B,f|G,12:27:45.6,13:0:31,10,2000,510|180|27
+The Lost Galaxy,f|G,12:34:20.2,8:11:51,9.8,2000,426|300|0
+The Mice A,f|G,12:46:10.1,30:43:57,13.5,2000,84|36|0
+The Mice B,f|G,12:46:11.2,30:43:21,13.8,2000,132|48|
+The Perfect Ghost,f|G,1:36:41.7,15:47:0,9.1,2000,630|570|25
+The Pleiades,f|U,03:47:0,24:07,1.6,2000,6600
+Thor's Helmet,f|N,7:18:30,-13:13:30,15.99,2000,540
+Toby Jug Nebula,f|N,7:56:51.3,-59:7:31,15.99,2000,300
+Trifid Nebula,f|N,18:2:18,-23:2:0,6.3,2000,1200
+Ursa Major A,f|G,9:55:33.5,69:4:2,7,2000,1494|690|157
+Ursa Major A,f|G,9:55:54,69:40:59,8.6,2000,672|258|65
+Ursa Minor Dwarf,f|G,15:8:48,+67:11:0,11.9,2000,1812|1143|70
+Virgo A,f|H,12:30:49.4,12:23:26,8.6,2000,498|396|170
+Virgo Cluster,f|G,12:18:49.3,14:25:3,9.7,2000,318|276|51
+War and Peace Nebula,f|N,17:24:43.5,-34:12:5,15.99,2000,1500
+West Veil Nebula,f|R,20:45:42,30:43:0,7,2000,4200
+Whale Galaxy,f|G,12:42:7.6,32:32:30,9,2000,912|168|86
+Whirlpool Galaxy,f|G,13:29:52.6,47:11:44,8.1,2000,672|414|7
+White Eyed Pea,f|P,16:11:44.5,12:4:19,10.7,2000,42
+Wienecke 4,f|D|G5,12:22:15.69,58:05:04.1,8.4,2000,49|0|83
+Wild Duck Cluster,f|C,18:51:6,-6:16:0,5.8,2000,660
+Witch Head Nebula,f|F,5:4:9,-7:15:0,15.99,2000,10800
+Zwicky's Triplett A,f|H,12:32:52.2,11:24:17,14,2000,48|36|45
+Zwicky's Triplett B,f|H,12:32:56.7,11:23:26,13.4,2000,12
+Zwicky's Triplett C,f|G,12:33:10,11:20:49,14.7,2000,30
