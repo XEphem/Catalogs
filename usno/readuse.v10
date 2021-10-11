@@ -1,0 +1,122 @@
+This is READ.USE, the file with the discussion of the format of the various
+files and how to use them.  Please refer to READ.ME for an introduction
+to the catalog.
+
+The format of USNO-A is an attempt to minimize the storage requirements as
+well as making the catalog relatively easy to search.  Apart from complaints
+that it wasn't in FITS format, users of UJ1.0, UJ1.3, and the preliminary
+catalog USNO-A0.9 seemed to find it legible.
+
+1) The coordinate system of the catalog is Right Ascension and South
+Polar Distance (SPD).  This decision was based on compatibility
+with the ESA Hipparcos and Tycho mission and catalogs.  In practice, SPD
+is far easier to manipulate than declination since it is positive definite.
+
+2) The coordinates were converted to integers in the following manner.
+     (RA in decimal hours)*15*3600*100, and
+     ((DEC in decimal degrees)+90)*3600*100
+Again, this choice agrees with Hipparcos/Tycho.
+
+3) Coordinates are given in J2000 at the epoch of the original blue plate.
+Somewhere on this CD-ROM set is the catalog.tar file which contains a copy
+of the plate database.  If it really makes a difference, please consult these
+files since they have been corrected for every known error.
+
+4) The sky is partitioned into 24 zones of SPD, each of width 7.5 degrees.
+This is similar to the choice made by the Guide Star Catalog.  Perhaps
+some software developed to search that catalog can be used for this catalog.
+
+5) In each zone, the catalog is sorted by increasing value of RA.
+
+6) Each of the 24 pieces of the catalog contains 3 files, and the naming
+convention is
+     zoneXXXX.YYY
+       XXXX is 10 times the SPD (0, 75, 150, ... 1725)
+       YYY = acc (ASCII accelerator file)
+           = cat (binary catalog file)
+           = lut (binary lookup table for GSC stars)
+7) Each catalog (.cat) file is a binary file containing 3 32-bit integers
+for each entry.  The FORTRAN dimension statement looks like (3,length).
+In a picture it looks like:
+
+    | RA (1) | Dec(1) | Mag(1) | RA (2) | Dec (2) | Mag (2) | ...
+
+8) The byte order is BIG_ENDIAN, which is the default for machines like
+Silicon Graphics and is opposite the default of machines like DEC.
+
+9) Since the catalog files can be quite long, I have found it convenient
+to refer to the accelerator (.acc) file, and use a combination of lseek()
+and read() to access the catalog file.  FORTRAN direct access I/O is
+terribly inefficient in that it does not easily handle making a big
+offset then doing small reads.
+
+10) The accelerator file (.acc) contains the first index (1-based FORTRAN
+sense) for the first object every 15 minutes of RA and the number of
+objects in that chunk of RA.  The total number of bytes in the file
+is given by (FIRST(96)+LONG(96)-1)*12.
+
+11) On this CD-ROM is a file called demo.tar which contains the source code
+to a program called square.f.  This is a simple program that extracts all
+entries within something like a square chunk of sky given the user's input
+of RA, Dec, and size.  It demonstrates how to use the .acc and .cat files.
+For further details, consult the README file in demo.tar.
+
+12) The RA takes a full 32-bit integer as does the SPD.  The third 32-bit
+integer has been packed according to the following format.
+
+     SQFFFBBBRRR   (decimal), where
+
+     S = sign is - if there is a correlated GSC entry, + if not.
+     Q = 1 if internal PMM flags indicate that the magnitude(s) might be
+         in error, or is 0 if things looked OK.  As discussed in read.pht,
+         the PMM gets confused on bright stars.  If more than 40% of the
+         pixels in the image were saturated, our experience is that the
+         image fitting process has failed, and that the listed magnitude
+         can be off by 3 magnitudes or more.  The Q flag is set if either
+         the blue or red image failed this test.  In general, this is a
+         problem for bright (<12th mag) stars only.
+
+     FFF = field on which this object was detected.  In the north, we
+         adopted the MLP numbers for POSS-I.  These start at 1 at the
+         north pole (1 and 2 are degenerate) and end at 937 in the -30
+         degree zone.  Note that fields 723 and 724 are degenerate, and we
+         measured but omitted 723 in favor of 724 which corresponds to the
+         print in the paper POSS-I atlas.  In the south, the fields start
+         at 1 at the south pole and the -35 zone ends at 408.  To avoid
+         wasting space, the field numbers were not put on a common system.
+         Instead, you should use the following test.
+
+            IF ((zone.le.600).and.(field.le.408)) THEN
+              south(field)
+            ELSE
+              north(field)
+            ENDIF
+
+     BBB = 10 times the blue magnitude.  The range 0 through 250 contains
+         reasonable magnitudes.  500 is reserved for a PMM flux estimator
+         that was exactly zero, and 501 through 750 are reserved for PMM
+         flux estimators that were negative.  Only the reasonable magnitudes
+         were calibrated: the weird ones are just as they came out of the PMM.
+         For northern fields, magnitudes are defined by the 103a-O emulsion
+         and filter, while southern fields are defined by the IIIa-J emulsion
+         and filter.
+
+     RRR = 10 times the red magnitude.  As above except that northern plates
+         are 103a-E emulsions and southern plates are IIIa-F emulsions.
+
+     Notes:
+
+     a) Since it is possible that a blue image correlated with the GSC but
+        did not have a corresponding red image, these entries have the
+        proper blue magnitude but have 999 for the red magnitude.
+
+     b) For GSC entries that did not correlate with PMM entries, the Q,
+        FFF, and BBB entries are zero, and the GSC magnitude is in RRR.
+        These entries are in the range of -1 to -160 since they, by definition,
+        have S negative.
+
+13) The GSC lookup tables contain many entries, each of which is two 32-bit
+integers long.  Each pair of integers is the record number in the .cat
+file (==byte/12) and the GSC catalog number.  They are sorted by USNO-A
+record number.  I believe that these files are correct, but have not
+subjected them to extensive verification.

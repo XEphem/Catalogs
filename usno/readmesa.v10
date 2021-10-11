@@ -1,0 +1,109 @@
+=====read.1st - the top level readme file==================
+
+This CD-ROM contains USNO-SA1.0, the spatially sub-sampled version of USNO-A1.0
+created to provide an astrometric reference catalog for asteroid hunters and
+other folks who do not need the entire USNO-A catalog.  The format is the same
+as USNO-A1.0 and the various read files from that distribution are included
+on this CD.  Also, a tar file called ugapa.tar contains the source code for
+the routines used to extract this catalog from USNO-A and to check it.
+The rest of this file contains a summary of the extraction process, but
+serious users should consult the source code to verify the exact sense of
+the limits and parameters, particularly those contained in getqual.f and
+each.f.
+
+Please refer to read.me for the Copyright Notification, the Request for
+Citation, and an introduction to the USNO-A1.0 catalog from which this
+catalog was extracted.
+
+Please refer to the PMM page located under the USNO web page
+   http://www.usno.navy.mil
+for pointers to updates and third party software that can be used to read
+this catalog, etc.
+
+Third-party catalog access software for UNIX and MS-DOS has been written by
+Bruce Koehn of Lowell Observatory. Source (FORTRAN) and executable (MS-DOS
+only) code can be downloaded from Lowell Observatory's Web page at
+   http://www.lowell.edu
+
+------------------------------------
+Discussion of the Extraction Process
+------------------------------------
+
+The size of the sampling pixel is 7.5/285 degrees on a side.  It was chosen
+because it
+   (a) equally divided the 7.5 degree zone width of USNO-A,
+   (b) produced a catalog of approximately 55 million entries, which is
+       just about as much as a CD-ROM can hold,
+   (c) is very close to making a pixel with an area of 2.5 square arcminutes.
+
+The pixels were created in a reasonable manner, but are not exactly square.
+Please refer to rdpixels.f for the exact details, but the algorithm finds
+the nearest integer number of pixels of the requested size in a band of
+declination, and then computes the limits as constant alpha and delta.
+The zero point for each zone of pixels is offset so that if there were the
+same number of pixels in adjacent zones, then the centers of one zone
+would be under/above the edges of the next zone.
+
+The USNO-A catalog is read, and the pixel for each entry is computed.  Each
+new entry is evaluated according to the following rules, which are contained
+in getqual.f and each.f
+
+   (a) If this is the first entry for a pixel, take it.
+   (b) If the quality of this entry is better (lower) than the current
+       value, take this entry.
+   (c) If the quality of this entry is the same (equal) to the current
+       value, then choose whichever is closest to the center.
+
+The quality is defined by the following algorithm.
+
+   (a) If 16.0 <= m_B <= 19.0 then q = 1
+   (b) Else if 14.0 <= m_B <= 20.0 then q = 3
+   (c) Else q = 5
+
+   After defining q, a penalty is added for a weird color.
+
+   (a) If (m_B-m_R) < 0.5 or (m_B-m_R) > 2.0 then q = q+1
+
+   These limits are approximately defined by F0 to K5 spectral type.
+
+The distance from the center of the pixel is not quite the geometric one
+because of the desire to choose a brighter star in dense regions.  The
+algorithm proceeds as follows.
+
+   (a) i = 5*SQRT((x-x0)**2 + (y-y0)**2)/SIZE
+
+   This divides the pixel into radial zones from 0 at the center to 7 in
+   the corner.  Making an integer means that all entries in a particular
+   zone are assigned the same weight.  This radial zone is them modified by
+
+   (b) r = 1000*i + 10*m_B
+
+   For stars closer to the center of the pixel, any brightness will be
+   chosen over a star in a more distant zone.  For stars in the same zone,
+   a brighter star will replace a fainter star.  Remember that the quality
+   test is applied first, so really bright or faint stars don't enter
+   into this decision.
+
+The goal of the algorithm was to find a spatially uniform sample of solar
+type stars, and to choose brighter ones in crowded regions.  I hope that
+this algorithm is a reasonable approximation.  Using this algorithm,
+54,787,624 stars were selected, leaving approximately 10% of the pixels
+empty.  The breakdown according to quality is as follows.
+
+   Quality     Number of entries
+   -----------------------------
+      1           34,454,509
+      2            5,170,963
+      3            6,014,824
+      4            2,264,809
+      5            4,745,419
+      6            2,137,100
+
+Since the format is the same as USNO-A catalog, I have included the
+demo.tar file which contains the program square.f which extracts stars
+in something like a square.  You will need to hack it to point to the
+catalog on your system, but it ought to be a reasonable template for
+accessing the catalog.  If there are problems, let me know.
+
+-Dave Monet	(dgm@nofs.navy.mil)
+

@@ -1,0 +1,271 @@
+This file is the first level of the on-board documentation.  Please
+read this file first.  Near the end of this file is a list of other files
+that might be helpful.  Questions and comments should be directed to
+
+   Dave Monet
+   US Naval Observatory Flagstaff Station
+   PO Box 1149  (US Mail Only)
+   West Highway 66  (FedEx, UPS, etc.)
+   Flagstaff AZ 86002
+
+   Voice: 520-779-5132
+   FAX:   520-774-3626
+   e-mail:  dgm@nofs.navy.mil
+
+Please understand that the level of support provided will be commensurate
+with the level of effort expended.  I am too busy to do your homework
+for you.  E-mail works better than the phone.
+
+============ Title ====================
+
+                    USNO-A V1.0
+              A Catalog of Astrometric Standards
+
+                   David Monet a)
+
+        Alan Bird a), Blaise Canzian b), Hugh Harris a), Neill Reid c),
+        Albert Rhodes a), Stephen Sell a),
+
+        Harold Ables d), Conard Dahn a), Harry Guetter a), Arne Henden b),
+        Sandra Leggett e), Harold Levison f), Christian Luginbuhl a),
+        Joan Martini a), Alice Monet a), Jeffrey Pier a),
+        Betty Riepe a), Ronald Stone a), Frederick Vrba a),
+        Richard Walker a)
+
+a) U.S. Naval Observatory Flagstaff Station (USNOFS)
+b) Universities Space Research Association (USRA) stationed at USNOFS
+c) Palomar Observatory, California Institute of Technology
+d) USNOFS, now retired
+e) USRA, now at University of Hawaii
+f) USRA, now at Planetary Science Institute, Boulder CO
+
+============== Abstract =======================
+
+    USNO-A is a catalog of 488,006,860 sources whose positions
+    can be used for astrometric references.  These sources were
+    detected by the Precision Measuring Machine (PMM) built and
+    operated by the U. S. Naval Observatory Flagstaff Station
+    during the scanning and processing of the Palomar Observatory
+    Sky Survey I (POSS-I) O and E plates, the UK Science Research
+    Council SRC-J survey plates, and the European Southern
+    Observatory ESO-R survey plates.  The PMM detects and processes
+    at and beyond the nominal limiting magnitude of these surveys,
+    but the large number of spurious detections requires that a
+    filter be used to eliminate as many as possible.  USNO-A's
+    sole inclusion requirement was that there be spatially
+    coincident detections (within a 2 arcsecond radius aperture)
+    on the blue and red survey plate.  For field centers of -30
+    degrees and above, data come from POSS-I plates, while data
+    from field centers of -35 and below come from SRC-J and ESO-R
+    plates.
+
+    USNO-A presents right ascension and south polar distance in
+    the system of J2000 at the epoch of the survey blue plate
+    for each object, and lists an estimate of the blue and
+    red magnitude.  For POSS-I sources, the photometric system is
+    the photographic system defined by the O and E emulsions and
+    filters, while southern sources are measured in the photometric
+    system defined by the IIIa-J and IIIa-F emulsions.  It is believed
+    that the typical astrometric error is about 0.25 arcseconds and
+    that the typical photometric error is about 0.25 magnitudes.
+    However, these error estimates are dominated by the systematic
+    errors incorporated in the calibration procedure, and some
+    fields may be significantly worse.  Should users be willing to
+    locally recalibrate the astrometry and photometry, the errors
+    arising from the PMM are believed to be in the range of 0.15
+    arcsecond and 0.15 magnitude.
+
+    To avoid the necessity of consulting many catalogs, objects
+    brighter than 11th magnitude that appear in the Guide Star
+    Catalog that were not detected by the PMM were inserted.
+    USNO-A covers the entire sky, and goes as deep as O=21, E=20,
+    J=22, and F=21 for objects with appropriate colors.  The limiting
+    magnitude is brighter for objects with extreme colors, and follows
+    from the requirement for a detection on both the blue and red
+    survey plate.  Although it covers the entire sky, there are holes
+    in the catalog in the vicinity of bright stars, regions of nebulosity,
+    crowded fields, etc.
+
+============== Statement of Intellectual Property Rights ====================
+
+   This catalog contains data from a diverse collection of photographs,
+reductions, and catalogs.  A large number of different organizations claim
+copyright and/or intellectual property rights on the various components.
+Although the details differ, all permissions for usage of data are
+contingent on unrestricted access.  Distribution and/or other direct costs
+can be recovered, but re-packaging, re-formatting, or similar activities,
+especially for commercial purposes, are not permitted except as authorized
+by the U. S. Naval Observatory in consultation with the other institutions
+listed below and as appropriate.
+
+   1) Palomar Observatory, National Geographic Society, and California
+      Institute of Technology own Palomar Observatory Sky Surveys I and II.
+
+   2) European Southern Observatory owns the ESO-R survey.
+
+   3) The UK Particle Physics and Astronomy Research Council (formerly
+      Science and Engineering Research Council and before that Science
+      Research Council) owns the SRC-J survey.
+
+   4) Space Telescope Science Institute (and AURA and NASA) own the
+      Guide Star Catalog.
+
+   5) US Naval Observatory owns the digitization of the plates and the
+      object parameters and catalogs made from them.
+
+   6) The Anglo-Australian Telescope Board retains the copyright to plates
+      taken with the U.K. Schmidt Telescope after 15 June 1988.
+
+In particular, we reserve the rights to compile and distribute zone catalogs,
+summary catalogs, or other significant pieces of USNO-A beyond that which is
+needed to support personal or institutional scientific or educational projects.
+Included in this is the preparation and distribution of images generated
+from the USNO-A catalog beyond those needed for finding charts and similar
+purposes.  In summary, you are welcome to use the catalog, but significant
+redistribution, extraction, and image rights are reserved, and permission
+needs to be obtained before using this catalog for such purposes.
+
+Please don't make us wake up the lawyers.  Please treat these data and
+catalogs in the spirit in which they were created.  They are for non-profit
+educational and scientific pursuits, and not for third parties to remarket
+for a profit.
+
+=======================Request for Citations=================================
+
+It is an unfortunate aspect of modern funding that impersonal and statistical
+measures are used to assess the productivity and usefulness of programs.
+If you benefited from using USNO-A, we ask that you give the catalog a
+citation.  By doing so, we may be able to justify the expense of continued
+production of catalogs.  Whenever possible, it would be appropriate to note
+which survey (POSS-I, ESO, and/or SRC) supplied the relevant data, since
+these surveys are measured, in part, by the extent to which they serve the
+community.
+
+=======================How To Proceed====================================
+
+There is no paper copy of this catalog.  All documentation that exists
+has been put somewhere on the CD-ROM set.  A reasonable strategy for
+learning about and using this catalog is the following.
+
+   read.me - Contains a brief description and the necessary statement
+             of intellectual property rights.
+
+   read.use - Contains a description of the format of the various files
+              and what they contain.  A companion file, demo.tar, contains
+              the source code for a simple program that uses this catalog.
+
+   catalog.tar - contains the ASCII text files that describe each of the
+                 plates taken as part of the various surveys.  Of particular
+                 interest is the epoch of each plate since proper motions
+                 have not been computed and applied to the position of
+                 each source.
+
+   read.ast - Contains a description of the astrometric reduction procedure.
+
+   read.pht - Contains a description of the photometric reduction procedure.
+
+   read.pmm - Contains a description of the PMM hardware and software.
+
+   sg1.tar - Contains the source code for all software needed to run the
+             PMM and do the real time processing.  Included in this file
+             are the bias and flat field frames as well as the coefficients
+             used in the geometric calibration procedure.
+
+   binary.tar - Contains the source code for about half of the routines
+                used to reduce the raw PMM data and produce this catalog.
+
+   newbin.tar - Contains the source code for the rest of the routines
+                used to reduce the raw PMM data and produce this catalog.
+
+================Table of Contents=====================
+
+       File                  CD-ROM
+----------------------------------------------
+
+   zone0000.acc/.cat            1
+   zone0075.acc/.cat            1
+   zone0150.acc/.cat            6
+   zone0225.acc/.cat            5
+   zone0300.acc/.cat            3
+   zone0375.acc/.cat            2
+   zone0450.acc/.cat            1
+   zone0525.acc/.cat            4
+   zone0600.acc/.cat            6
+   zone0675.acc/.cat            5
+   zone0750.acc/.cat            7
+   zone0825.acc/.cat           10
+   zone0900.acc/.cat            8
+   zone0975.acc/.cat            7
+   zone1050.acc/.cat            8
+   zone1125.acc/.cat            9
+   zone1200.acc/.cat            9
+   zone1275.acc/.cat            4
+   zone1350.acc/.cat           10
+   zone1425.acc/.cat            3
+   zone1500.acc/.cat            2
+   zone1575.acc/.cat            6
+   zone1650.acc/.cat            2
+   zone1725.acc/.cat            3
+
+   .lut files for all zones     7
+   pmmgsc.len                   7
+
+   read.me                      1
+   read.ast                     1
+   read.pht                     1
+   read.pmm                     1
+   read.use                     1
+
+   demo.tar                     1
+   catalog.tar                  2
+   newbin.tar                   6
+   binary.tar                   8
+   sg1.tar                      8
+
+================Other Notices=====================
+
+The source codes are the intellectual property of the U. S. Naval
+Observatory and are provided so that the expert user can answer detailed
+questions about how the catalog was constructed.  Casual users should
+avoid them because they contain no instructions as to where various useful
+things are hidden.  Release of the source code is made to support such
+investigations only, and is not intended for commercial or other
+non-professional applications.  The source code is a protected property,
+and illegal usage is prohibited.  If in doubt, please contact Dave Monet
+for clarifications and protections.
+
+The PMM program has been supported through internal funding by USNO, and
+by funding provided by the U. S. Air Force through the Space Surveillance
+Network Improvement Program.
+
+This work is based partly on photographic plates obtained at the Palomar
+Observatory 48-inch Oschin Telescope for the First and Second Palomar
+Observatory Sky Surveys which was funded by the Eastman Kodak
+Company, the National Geographic Society, the Samuel Oschin
+Foundation, the Alfred Sloan Foundation, the National Science
+Foundation grants AST84-08225, AST87-19465, AST90-23115 and
+AST93-18984,  and the National Aeronautics and Space Administration 
+grants NGL 05002140 and NAGW 1710.
+
+This catalog is based, in part, upon original material from the UK Schmidt
+Telescope, copyright in which is owned by the UK Particle Physics and Astronomy
+Research Council.  No charge beyond recovery of costs has been made by 
+USNO or PPARC for the provision of these data.  These data are provided
+to its recipient for its purpose without restriction, except on the condition
+that the data should not be replicated, in whole or in part, and passed
+on for profit.  The plates for the SRC-J survey were taken with the
+UK Schmidt Telescope (UKST).
+
+The copyright inherent in the plate material obtained with the UK Schmidt
+Telescope taken after 15 June, 1988 rests with the Anglo-Australian
+Telescope Board.
+
+The European Southern Observatory holds the copyright to the ESO-R
+Survey plate material, and USNO scanned these plates under an agreement
+with ESO.  This agreement states, in part, that the data derived from these
+scans shall be available to the public without restriction and without
+charge beyond recovery of the cost of distribution.
+
+USNO would like to thank NOAO/KPNO for the permission to borrow the glass
+copies of the SRC and ESO surveys for scanning, and to Bill Schoening and
+Richard Green for their assistance.

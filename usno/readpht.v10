@@ -1,0 +1,187 @@
+This is READ.PHT, the file with a discussion of the photometric calibration
+of USNO-A.  Please refer to READ.ME for an introduction to the catalog.
+
+Summary:
+
+   The photometric calibration of USNO-A1.0 is about as poor as one can
+   have and still claim that the magnitudes mean something.  The calibration
+   process is dominated by the lack of public domain photometric databases.
+   In particular, this calibration was done without the final Hipparcos
+   and Tycho catalogs, and without the Guide Star Photometric Catalog II.
+   We have done the best job we could with the available data, and will
+   recalibrate the catalog when significant databases become available.
+   We believe that the internal magnitude estimators for stars are probably
+   accurate to something like 0.15 magnitudes over the range of 12th to 19th,
+   but that the systematic error arising from the plate-to-plate differences
+   is at least 0.25 magnitudes in the North and perhaps as large as
+   0.5 magnitudes in the South.  Users who are able to locally recalibrate
+   USNO-A photometry are encouraged to do so since that will remove the
+   systematic errors and leave only the measuring error.
+
+Source Code:
+
+   Useful places to look for pieces of the calibration are the following:
+
+       newbin/piphot - generation of the USNO CCD parallax program magnitudes
+       newbin/reversion - mapping the parallax program to individual plates
+       newbin/bc1 - mostly obsolete with the exception of generating a
+                    couple of input files for bc2
+       newbin/bc2 - calibration of the northern sky
+       newbin/bc3 - calibration of the southern sky
+       binary/ugap4 - find multiple detections of the same object
+       binary/ugap7 - apply the calibration to the raw catalog
+
+Strategy:
+
+   The calibration of USNO-A is divided into the calibration of the northern
+   sky and then the calibration of the southern sky.  In each case, the
+   first step was to compute the plate-to-plate offsets and convert the
+   magnitudes from a specific plate into a system that was valid for all
+   plates (called the meta-magnitude system).  The second step was to
+   compute the transformation from the meta-magnitude system to pseudo-
+   photographic magnitudes computed from CCD photometry and the Tycho
+   Input Catalog.
+
+The Northern Calibration:
+
+   Removal of the plate-to-plate differences begins with examination
+   of the list of all objects found by the code in ugap4 to be multiple
+   detections of the same object.  For details, refer to the code, but it
+   is sufficient to summarize this process as finding all objects that
+   fall within a 1-arcsecond radius of another object.  All objects
+   inside this radius were considered to be the same object, and the code
+   in ugap4 selects one for the catalog and saves all objects in the
+   SAMExxxx.dat file.  Code in bc1 looks at the SAMExxxx.dat files and
+   computes the list of plates that overlap other plates and makes
+   intermediate files of all stars that overlap a specific plate.
+   Code in bc2 (parfit.f) then iterates a solution that starts at a zero
+   offset (constant) or a zero offset and unit slope (linear) for each
+   plate and computes the best fit for that plate to all of its neighbors.
+   At the end of each iteration, all solutions are updated before the
+   start of the next iteration.  Typically, the solution is very close
+   to the final value after about 5 iterations, but it was allowed to
+   run for 17 iterations so that a stable solution was found for all plates.
+
+   The original plan was to allow a linear solution for each plate, but
+   after the difficulties encountered in the Southern solution, the solution
+   was done allowing only a constant term.  Visual examination of the
+   calibration showed that both were essentially similar, so the constant
+   one was selected.  The plate-to-plate solutions are found in bc2/calcoef.XX
+   files, where XX is the iteration number.  Removal of the plate-to-plate
+   offset before application of a transformation between internal and
+   external magnitude systems was far more stable than doing the solution
+   after such a transformation.  The internal magnitude systems for
+   each plate are surprisingly similar.
+
+   Because of the lack of a suitable calibration database, we decided to
+   use the B and V magnitudes from the Tycho Input Catalog to calibrate
+   the bright end, and to use the V and I CCD photometry done at USNO on
+   parallax fields for the faint end.  Henden supplied tables for computing
+   the color corrections which he derived from numerical integrations of
+   spectrophotometric data and filter response curves.  For Tycho data,
+   only stars with B and V were accepted, and the Henden relationships
+   were used to compute O(B,V), E(B,V), J(B,V), and F(B,V).  Examination
+   of the residuals to the photometric solution indicate that there
+   are significant color terms remaining: the O/J solutions show less
+   dispersion than the E/F solutions.  To mitigate this problem, Tycho
+   stars with B-V less than 0.5 or greater than 1.2 were ignored in the
+   final solution.
+
+   The USNO photometric database was complete for V and I, but many stars
+   did not have B data.  Because of this, we decided to ignore the B
+   data when available, and to base the calibration on the V and I data
+   alone.  Dahn supplied a relationship between V-R and V-I, and a crude
+   calibration of B-V as a function of V-R was used.  These and the Henden
+   tables can be found in newbin/piphot in the various .tbl files.
+   Again, this calibration procedure left significant color terms.  The
+   E/F calibration shows less dispersion than the O/J calibration.
+
+   With the ensemble of pseudo-photographic magnitudes for standard stars,
+   the relationship between the meta-magnitude and the standard magnitude
+   system was done by newbin/tcapply.  The algorithm attempts to find a
+   ridge line between the two systems, and then to fit a smoothing spline
+   to it.  This solution is provided to the user (newbin/bc2/tcnodes.?)
+   who can examine, correct, and extrapolate it as appropriate.  These
+   new nodes (newbin/bc2/tcedit.?) are then fit with the smoothing spline
+   and the final lookup tables (newbin/bc2/tclut.?) are produced.  Although
+   the blue and red solutions are done by the same code, they are completely
+   independent of each other.
+
+   It is possible for the PMM to produce magnitudes that don't make sense.
+   In particular, the total flux can be zero or negative should the estimator
+   of local sky contain some sort of contamination.  These fluxes are
+   mapped into 50.0 for the case of zero flux, and 50.1 through 75.0 for
+   the case of negative flux.  In the latter case, the flux is negated before
+   taking the logarithm and 50 is added to the result.  These magnitudes
+   are ignored during the calibration process and passed directly from
+   the PMM to the final catalog.  At best, they serve as flags that something
+   was wrong with a particular image.
+
+The Southern Calibration:
+
+   The first step of the southern calibration is the same as that for the
+   northern calibration, the removal of the plate-to-plate offsets.
+   This is done in newbin/bc3/parfit and makes files soucoef.XX in a
+   manner very similar to the northern solution.  However, the first
+   solution that allows a constant and slope for each plate was seen
+   to quadratically grow for the red (F) solution but not the blue (J)
+   solution.  This was traced to a small but significant correlation between
+   limiting magnitude and declination which drove the numerical instability.
+   Solving for only a plate-to-plate offset showed the same instability.
+   Therefore, an extra routine (newbin/bc3/damper.f) was inserted to
+   remove this term after each iteration.  The blue solution with and
+   without this term was examined and found to be essentially the same,
+   so we have some confidence that the red solution is reasonable, too.
+   The source of this correlation is unknown, and should disappear with
+   the inclusion of more calibration data.
+
+   The calibration of the meta-magnitude system in the southern solution
+   was made more difficult because there are no USNO parallax fields
+   south of -20.  Instead, a boundary condition that the southern and
+   northern solutions should agree in the -30 degree zone was used.
+   The list of same stars found by binary/ugap4 was used to identify those
+   objects with northern and southern magnitudes, and the calibrated
+   northern magnitudes were combined with the Tycho Input Catalog pseudo-
+   J and F magnitudes to provide the calibrators for the southern
+   meta-magnitude system.  Because of all of the difficulties associated
+   with the apparently incomplete removal of color terms based on broad
+   band photometric indices, the decision was made to ignore differences
+   between J and O, and F and E.  This is a crude approximation, but one
+   that was forced by the lack of appropriate calibration databases.
+   As with the north, the calibration of the meta-magnitude system starts
+   with nodes computed from a ridge line, and ends with a lookup table
+   computed from nodes supplied by the user.  The code is in newbin/bc3
+   and is nsapply.f, nsnodes.?, nsedit.?, and nslut.? in a manner similar
+   to the northern solution.
+
+Other Matters:
+
+   The Schmidt telescope vignetting function was ignored.  Indeed, there
+   are three such functions, but the lack of a suitable calibration database
+   makes it almost impossible to solve for these functions from PMM data.
+   The choice of zero vignetting function follows from Henden's analysis
+   of the UJ1.0 data in which he could not independently verify the
+   Palomar Schmidt vignetting function adopted by the Guide Star Catalog.
+   Henden's analysis showed only a marginally significant function, and
+   it was substantially smaller than that developed for the GSC.
+
+   The northern calibration must be done first because of the reliance
+   of the southern calibration on it.  Both are then copied to binary/ugap7
+   where they are applied to the uncalibrated catalog and same files.
+   Various other programs verified that the calibration was applied
+   properly.
+
+   The distinction between galaxy magnitudes and stellar magnitudes was
+   ignored.  This followed from the lack of star/galaxy separation
+   information for POSS-I plates.  The reductions being developed for
+   USNO-B include star/galaxy separation, but they rely on the improved
+   signal to noise ratio offered by the fine grain emulsions.
+
+   Future releases of USNO-A will incorporate improved photometric
+   calibration algorithms.  The release of the Tycho catalog in 1997
+   will offer a dramatic improvement in the calibration of the bright
+   end of the catalog as well as the transition from saturation
+   around 12th magnitude.  The release of GSPC-II will provide an important
+   calibration database for the intermediate stars, especially in the south,
+   but more work is needed to extend the calibration to 20th magnitude
+   and beyond.
