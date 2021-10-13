@@ -15,23 +15,11 @@ interactive astronomical software ephemeris.
   Stars](https://xephem.github.io/XEphem/Site/help/xephem.html#mozTocId147305)
   section for more details.
 
-* `Official/` — Large collection of catalogs (weighing a total 328 MB)
+* `Official/` — Large collection of catalogs (weighing a total 1.1 GB)
   that, in the old days, shipped with XEphem on its installation media.
   Most of the catalogs are in the `.edb` text format, though two are in
-  the binary `.xe2` format.
-  
-* `usno/` — The USNO-SA2.0 catalog, a sub-sampled version of the
-  USNO-A2.0 catalog. It contains only a tenth as many stars as the parent
-  catalog (54,787,624 stars in 634 MB). The goal was to provide a spatially
-  uniform distribution of stars in an intermediate range of magnitudes.
-  There are about 1,300 stars per square degree of sky. Note that such a
-  uniform distribution does not look much like the real sky, but is
-  intended for use as a "reference grid" for comet or asteroid hunters, etc.
-  Though traditionally installed at `/usr/local/xephem/catalogs/usno`, you
-  can install the catalog anywhere as long as you enter its path in the
-  “USNO A or SA catalogs - Root directory” field in XEphem’s “Field Stars”
-  window. This is an updated version with the previously missing sky zones
-  added.
+  the binary `.xe2` format and two are directories containing files in the
+  original catalog format.
 
 ## User contributed
 
