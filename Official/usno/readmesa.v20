@@ -1,0 +1,27 @@
+This is the top level documentation file associated with the USNO-SA2.0
+distribution.  Fortunately, it can be really simple.  USNO-SA2.0 is quite
+similar to USNO-SA1.0, and if you are using the earlier version, all
+you really need to do is substitute the new .ACC and .CAT files.
+
+If you are new to USNO-SA, then you should start by reading READMESA.V10
+which contains the READ.1ST file from that distribution.
+
+The rest of the READ* files in this distribution come from the USNO-A2.0
+distribution (and from USNO-A1.0), and provide extended documentation.
+
+We are migrating Web sites, so please be patient during this transition.
+The old site is
+   http://www.usno.navy.mil/nofs
+and the new site is
+   http://www.nofs.navy.mil
+Our intention is to provide the latest versions of the various READ* files
+and other useful stuff on the PMM's page in the Web site, and to make the
+long files available by FTP or CD-ROM.
+
+If you wish to use USNO-SA for commercial applications or intend to
+redistribute it, please check with us first.  This catalog contains
+intellectual property rights claimed by many organizations (see README.V10)
+and these must be respected.
+
+-Dave
+	(Dave Monet is dgm@nofs.navy.mil)

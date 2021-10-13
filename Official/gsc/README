@@ -1,0 +1,36 @@
+This directory contains the Hubble Guide Star catalog, version GSC-ACT. This
+version eliminates most of the systematic errors found in the STScI GSC 1.1.
+For more information see http://www.projectpluto.com/gsc_act.htm.
+
+The files are in a special compressed format. The file structure mimics the
+layout of the 2 CDROM set. The STScI format required 1.2GB, while this format
+requires 160MB, a compression of 7.5:1. Like the CDROMs, the file names are
+the GSC small region designation, but with a suffix of .ech.
+
+The files are in a portable packed binary format but the header is one line of
+plain ASCII. One way to view this line on UNIX is to use "head -1 <filename>".
+The header line consists of the following fields. Because the absolute value of
+the declination is stored one must also know that southern region ids are 4663
+and greater.
+
+	Version number
+	Region ID
+	Number of stars
+	Western (smallest) RA, radians
+	abs(Dec nearest 0), radians
+	south (1 or 0)
+	<newline>
+
+The binary format then begins immediately following the newline and stores
+each star in 8 bytes, as follows:
+
+     2  delta ra, rads, 0 .. degrad(4) * cos(dec0), scaled 0 .. 0xffff
+     2  delta dec, rads, 0 .. degrad(4), scaled 0 .. 0xffff
+     2  small region id
+     2  upper 2 bits are class, lower 14 are magnitude*900
+     ---
+     8  total bytes per entry
+
+All values are stored in big-endian byte order. To achieve architecture
+portability, the application must pull each record apart byte-by-byte and
+construct aggregates at runtime.

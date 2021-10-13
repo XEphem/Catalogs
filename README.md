@@ -15,10 +15,11 @@ interactive astronomical software ephemeris.
   Stars](https://xephem.github.io/XEphem/Site/help/xephem.html#mozTocId147305)
   section for more details.
 
-* `Official/` — Large collection of catalogs (weighing a total 328 MB)
+* `Official/` — Large collection of catalogs (weighing a total 1.1 GB)
   that, in the old days, shipped with XEphem on its installation media.
   Most of the catalogs are in the `.edb` text format, though two are in
-  the binary `.xe2` format.
+  the binary `.xe2` format and two are directories containing files in the
+  original catalog format.
 
 ## User contributed
 

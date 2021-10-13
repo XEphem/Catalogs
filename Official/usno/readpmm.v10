@@ -1,0 +1,516 @@
+The following text is copied from the UJ1.0 CD-ROM and gives an overview
+of the PMM and its programs.  In an attempt to satisfy the serious user
+of this catalog, the source code for the PMM is found in the sg1.tar file
+somewhere in this CD-ROM set.  This file contains the source code for
+all pieces of the executable image as well as the key data files used
+to calibrate various pieces of the PMM.  References to code in this section
+point to files in sg1.tar.
+
+    Dave Monet is dgm@nofs.navy.mil
+
+The Precision Measuring Machine (PMM) was designed to digitize and reduce
+large quantities of photographic data.  It differs from previous designs
+in the manner by which the plates are digitized and in that it reduces the
+pixel data to produce a catalog in real time.  This section gives an
+introduction to the design, hardware, and software of the PMM.  For those
+wishing to pursue issues in greater detail, the software used to control
+the PMM may be found in the directory exec/c24, and all software used to
+acquire and process the image data is found in the other directories
+under exec/ (processing begins with exec/misc/f_parse).
+
+High-speed photographic plate digitization has been accomplished using
+three different approaches.  Many machines (APS, APM, PDS, etc.) have
+a single illumination beam and a single channel detector.  This approach
+can offer extremely accurate microdensitometry at slow scanning speeds
+(PDS) and has been used by intermediate-speed machines (APS, APM, etc.)
+that have produced many useful scientific results.  The second approach is
+to use a 1-dimensional array sensor, such as the SuperCOSMOS design.  These
+offer much higher scanning rates but suffer from more scattered light than
+true microphotometers.  The third approach (PMM) is to use a 2-dimensional
+array sensor, such as a CCD.  This offers yet higher throughput at the
+expense of more scattered light.  The 1-D and 2-D designs are new enough
+that detailed comparisons with single pixel designs have yet to be done.
+
+Of the three designs, only the 2-dimensional array design separates image
+acquisition from mechanical motion.  In this approach, the platen is stepped
+and stopped, its position is accurately measured, and then a CCD camera takes
+a picture of a region of the photographic material.  In this manner, the
+transmitted light (plates and films) or reflected light (prints) is digitized
+and sent to a computer for processing and analysis.  The mechanical system
+is not required to move the platen in a precise direction or speed while
+image data are being taken.  Therefore, the mechanical system is much easier
+to build and keep operational, and platen sizes can be much larger (a feature
+needed to minimize the thermal and mechanical impact of replacing the
+photographic materials).
+
+
+A.  Hardware
+
+The PMM design is conceptually simple.  The mechanical system executes a
+step and stop cycle, and then reports its position to the host computer.
+A CCD camera takes an exposure of the "footprint" in its field of view,
+and the signal is then read, digitized, and passed to the host computer.
+Once the image is in the computer, the mechanical motion may be started
+and image processing and mechanical motion can occur simultaneously.
+In practice, the PMM design is a bit more complicated because it has
+two parallel channels for yet higher throughput.  The various subsystems
+are the following.
+
+	a) The mechanical system was manufactured by the Anorad Corporation
+	of Hauppauge NY to specifications drawn up by USNOFS astronomers
+	and their consultant William van Altena.  Its features include
+	the following:
+
+		i) 30x40-inch useful measuring area.
+		ii) granite components for stability.
+		iii) air bearings for removal of friction.
+		iv) XY stage position sensed by laser interferometers.
+		v) Z and A platforms for above/below stage instruments.
+		vi) ball screw motion in X at 4 inch/second maximum speed.
+		vii) brushless DC motors in Y at 2 inch/second maximum speed.
+		viii) computer control of all motions.
+		ix) two laser micrometers mounted on the Z stage to measure
+		    distance to photographic materials.
+		x) two CCD cameras (discussed below).
+
+	In addition, it has a single channel microphotometer system built
+	by Perkin Elmer, but that system is not used for POSS plates.
+	It is controlled by a dedicated PC that communicates to
+	the outside world by an RS-232 interface.
+
+	The PMM is housed in a Class 100,000 (nominal) clean room and
+	the thermal control is a nominal plus or minus one degree
+	Fahrenheit.  Actual performance is much better over the 80
+	minutes needed to scan a pair of plates.  The temperature is
+	usually stable to +/-0.2 degrees and short term tests show
+	a repeatability of 0.2 microns over areas the size of POSS
+	plates.  Thermal information is recorded during the scan
+	and is part of the archive.
+
+	b) The images are acquired and digitized by two CCD cameras made
+	by the Kodak Remote Sensing Division (formerly Videk).  Each
+	has a format of 1394x1037 and a useful area of 1312x1033 pixels.
+	The pixels are squares of 6.8 microns on a side, have no dead
+	space between pixels (100% filling factor), and there are no
+	bad pixels in the array (Class 0).  A flash analog to digital
+	converter is part of the camera, and the image is read and
+	digitized with 8-bit resolution at a rate of 100 nanoseconds
+	per pixel.
+
+	Printing-Nikkor lenses of 95 millimeter focal length are used to
+	focus the sensor on the photographic plate with a magnification
+	of 2:1.  The resolution of these lenses exceeds 250 lines per
+	millimeter and they have essentially zero geometric and chromatic
+	distortion when used at 2:1.  The illuminator consists of a
+	photometrically stabilized light source, a circular neutral
+	density filter to compensate for the diffuse density of the
+	plate, a fiber bundle, and a Kuhler illuminator to minimize
+	the diffuse component of illumination.  Each camera's light path is
+	separate except for the single light source.
+
+	c) Each camera has its own dedicated computer and related peripherals.
+	The digital output of the camera is fed to a 100 megabit
+	per second optical fiber for transmission to the computer room
+	where a matching receiver converts it back into an 8-bit wide,
+	10 megabyte per second parallel digital signal.  This signal is
+	interfaced to a Silicon Graphics 4D/440S computer using an
+	Ironics 3272 Data Transporter attached to the VME bus.  This
+	system supports the synchronous transfer of 1.4 megabytes in
+	0.14 seconds with an undetectably small error rate.
+
+	The 4D/440S supports DMA from the VME bus into its main memory
+	without an additional buffer.  Once in the computer, the PMM
+	software (discussed below) does whatever is appropriate, and,
+	if the user desires, the pixel data can be transmitted across
+	a fiber optically linked SCSI bus to disk or tape drives located
+	in the PMM room.  This is particularly convenient for the operator.
+
+	d) A DEC MicroVAX-II computer acts as system synchronizer, and does
+	little more than coordinate all steps in the motion and processing.
+	This operation is not as trivial as it sounds.
+
+	e) The user interacts with the PMM using any X-window terminal
+	by logging into the MicroVAX and starting the control program.
+	The control program logs into the Anorad PC and each of the
+	processing computers across RS-232 (it is too old to have X).  These
+	computers open X-windows on the users terminal, and all interaction
+	with them (including image display) avoids the MicroVAX.  A simple
+	interpretive language was written for the MicroVAX, and plates
+	are measured by executing sequences of commands.  Sequences
+	may be found in exec/c24/seqNNN.pmm.  The sequence for measuring
+	4 UJ plates is seq485.pmm.
+
+B.  Plate Measuring Sequence
+
+The sequence for measuring plates is designed to minimize human intervention.
+Each of the two platens holds four POSS plates.  While one is being measured,
+the other is loaded so that the plates can come to thermal equilibrium.
+The measurement sequence consists of the following phases.
+
+	a) The camera is positioned over the middle of the plate and the
+	neutral density filter is set to maximum (D=3.0).  A sequence of
+	fixed length exposures is made as the density is reduced, and
+	the optimum value for the exposure is found.  Due to limitations
+	of the camera interface, the exposure time has a granularity of
+	one millisecond and must be in the range of 2 to 127 milliseconds.
+	Once the optimum neutral density is found, it is kept at that value
+	for the entire plate.  Changes in diffuse density are followed by
+	changing the exposure time.
+
+	b) The Z-stage is fixed at a nominal value, and the plate pair
+	(1/2 or 3/4) is scanned to obtain the distance between the Z
+	laser micrometers and the surface of the plate.  The XY stage is
+	positioned at a Y value that will later be used for the digitization
+	footprints, and then driven at high speed in X.  As the stage moves,
+	the micrometer and the Anorad PC are sampled to determine the
+	Z distance as a function of X position.  This procedure is repeated
+	for the sequence of Y positions, and the 2-dimensional map of Z
+	distance is obtained.
+
+	c) The camera is positioned over the middle of the plate, and
+	a sequence of exposures is taken at different values of the Z
+	coordinate.  For each exposure, a measure of the sky granularity is
+	computed, and interpolation is used to find the Z coordinate that
+	maximizes the granularity.  This establishes the "best" focus in
+	an impersonal manner, and it appears to be stable to plus or
+	minus 50 microns in Z.
+
+	d) A sequence of frames are taken of the central area of the plate
+	with increments of 1.0 millimeter between each, and the standard
+	star finding and centering algorithm is run on each frame.
+	After all frames have been taken, the nominal value of the plate
+	scale is used to identify unique stars seen on each of several
+	frame.  Once the set of measures is isolated, software computes
+	a revised estimate of the plate scale.  This revised estimate
+	can be considered the difference between the layer of the emulsion
+	that reflected the laser micrometer beam of the reference plate
+	and of the current plate.
+
+When the plate is scanned, the Z stage is driven to the position appropriate
+for each footprint, which is the sum of the "best focus" plus the difference
+between the current location and the central location as determined by the
+laser micrometers.  After the positions have been measured, a linear
+expansion is applied to the pixel coordinates for each star to remove the
+difference in the (observed-nominal) plate scale.  At first glance, this
+algorithm seems quite complicated, but determination of the plate scale
+is critical to the astrometric integrity of the PMM.  To measure to 0.1
+arcsecond, the scale must be known to 0.008%.  The following factors
+contribute to uncertainties in the plate scale.
+
+	a) No technology better than a laser micrometer was found to
+	measure the distance between the Z stage and the plate.  Unfortunately,
+	the laser is somewhat sensitive to the reflectance of the surface,
+	and the range of diffuse densities encountered during the scanning
+	of the UJ plate of about 0.1 to 2.5 causes an uncertainty of where
+	the micrometer is measuring.  The only competing technology,
+	touch probes, was considered too risky for use with original POSS-I
+	and -II plates.
+
+	b) The POSS plates are not flat, and no reasonable plate hold-down
+	mechanism was proposed.  This problem is a minor annoyance for
+	UJ and POSS-II plate because the typical +/- 200 microns could
+	be removed by software.  Unfortunately, the +/-1 or millimeter
+	seen on the POSS-I plates causes the images to be out of focus,
+	and a surface following algorithm is required.
+
+Unfortunately, the elaborate focus and scale determination routines developed
+to measure POSS-I and POSS-II plates were unreliable for measuring the
+UJ plates.  Many UJ plates had diffuse densities so low that the sky and
+the noise in the sky were extremely difficult to measure.  To the human
+observers, these plates seem as clear as window glass.  Since the UJ exposures
+were only 3 minutes, many plates had so few stars in a single footprint
+that the scale determination routine got lost.  In either case, the error
+induced by a lost algorithm was much larger than just measuring the focus on
+a good plate and using that value for the UJ plate.  This was done, so the
+list in the preceding paragraph must be extended.
+
+	c) The difference in focus between the current plate and that used
+	to determine the CCD camera scale is not known.  Note that the PMM
+	should follow the current plate properly since that measurement
+	is only the difference between the local and central value
+	determined by the laser micrometer.  What is not (or only poorly)
+	known is the offset at the central location.
+
+C.  Image Analysis Algorithms
+
+The mechanical and camera systems serve only one purpose: to deliver image
+data to the processing computers.  The major precept of the PMM design is to
+do all image processing and analysis in real time.  It was true when the PMM
+was designed, and is still true, that it takes much longer to read or write
+an image to storage devices (particularly those for archival storage) than
+it does to extract the desired information.  Indeed, the original PMM design
+had no mechanism for saving the pixels.  A substantial amount of thought
+and work has gone into the design of the image processing algorithms.  This
+section gives an overview of the code, and the serious reader is encouraged
+to read the source code (located in exec/ and its subdirectories).
+
+When the MicroVAX notifies the computer that the mechanical motion has been
+completed, the computer commands one or more exposures to be taken.  The
+code is written to take 1, 2, 3, 4, or 8 exposures depending on the value
+of GRABNORM.  The routine exec/misc/f_autoexp is used most often because
+it takes the exposures, evaluates the sky background, and will re-take
+an exposure with a modified exposure time if certain limits are exceeded.
+Since the background is variable, this type of autoexposure routine is
+necessary.  Note that it does not vary the setting of the neutral density
+filter used to illuminate the plate, so it has a limited range over
+which it can modify the exposure.
+
+Another problem related to taking an exposure is the presence of holes, tears,
+and the area around the sensitometer spots.  Typically, the POSS plate sky
+background has a diffuse density larger than two, but where the emulsion is
+absent or hidden from the sky, the density can be very close to zero.
+These regions cause gross saturation of the CCD camera, and its behavior
+becomes extremely non-linear, even to the point of having decreasing
+signal level with increased exposure.  To avoid this, the routine
+exec/misc/f_toasted takes a very short exposure to test for this condition
+before the normal exposure sequence is started.
+
+Flat field processing is done in the traditional manner, using bias and
+flat frames taken under controlled circumstances.  The CCD cameras are
+quite linear and uniform, and the flat field processing does little more
+than take out the non-uniformities in the illuminator.  Pixel data are
+converted from unsigned bytes into floating point numbers during the
+flat field processing, and all steps in the image analysis and reduction
+software are applicable to non-photographic data.
+
+The image processing is divided into a hierarchy based on accuracy,
+and there are three levels.  The first, called the blob finder, is charged
+with finding areas that need further processing, and doing this with a
+relatively coarse accuracy of +/-1 pixel.  The second is invoked to refine
+this guess to an accuracy of +/- 0.2 pixel and to provide improved estimators
+for the object's size and brightness.  The third step is non-linear least
+squares processing,  which produces the accurate estimators for image
+position, and moment and other image parameters.  Each is discussed in
+greater detail in the following paragraphs.
+
+        a) Blob finding:  Many different algorithms have been proposed to
+	find blobs in an image.  (I prefer to use "blob" instead of "star"
+	since we do not know in advance what sort of an object we have
+	found.)  The PMM algorithm was designed for very high speed.
+	It is based on the concept that finding an image requires neither
+	the spatial resolution nor the intensity resolution required to
+	measure accurate image parameters.  The first step of the blob
+	finder is to block average the input image by a size PARMAGNIFY
+	which can take on values of 1, 2, or 4, but all experience indicates
+	that 4 is acceptable for PMM processing of POSS plates.  (The driver
+	for this processing is in exec/pfa124subs/bmark2_N.f where N
+	takes on the values of 1, 2, or 4.)  The larger the value of PARMAGNIFY,
+	the faster the blob finder will operate.
+
+	With PARMAGNIFY determined, the block average TINY image is computed
+	and then subjected to a median filter to produce the SKY image
+	of similar size.  The histogram processing of the sky image determines
+	the dispersion of the sky, a scaler that will be applied to the
+	whole image.  Then, the sky image and the sky dispersion are used
+	to generate the DN1P image, an image whose pixel values are 1
+	if the TINY image was greater or equal to the SKY pixel plus
+	PARSIGMA times the sky dispersion, or 0 if not.  If the DN1P pixel
+	is set to 1, the corresponding SKY pixel is set to zero indicating
+	that it should not be used to compute local sky values.
+
+	Another picture of reduced size is computed as well.  The
+	DN2P pixel is set to 1 if the TINY pixel is greater or equal
+	to PARSAT, a number that represents the level at which an image
+	is considered to be saturated.  In practice, the number is about
+	230 instead of the maximum possible value of 255 that comes from
+	the camera A/D converter.
+
+	The logic behind the TINY, SKY, DN1P, and DN2P is the following.
+	Most computers take many cycles to compute an IF statement, and
+	these tend to negate look-ahead logic needed to make software
+	execute quickly.  By making images whose values are 0 or 1,
+	additions and multiplications can replace many IF statements,
+	and thereby increase the speed of the code.  Our experience is
+	that automatic blob finding is very expensive (slow) because of
+	the complexity of the algorithm, and our efforts to run it in
+	parallel mode were unsuccessful.  Hence, optimization was needed
+	in this part of the code to keep its bandwidth high.
+
+	Given TINY, SKY, DN1P, and DN2P, blob finding can begin.  The
+	algorithm is based on the concept that we wish to find
+	isolated, mostly circular objects.  The algorithm considers a
+	circular aperture and computes the area and perimeter based on
+	the pixel values in either the DN1P or DN2P image.  The area is
+	the number of pixels that meet or exceed the detection
+	criterion inside of the aperture, and the perimeter is the
+	number of such pixels that cross from inside the aperture to
+	outside the aperture.  A detection is triggered when the area
+	has a non-zero value and the perimeter is zero.  This means
+	that a blob has been isolated.  Once a blob has been detected,
+	its location and coarse magnitude are tallied and the pixels in
+	DN1P or DN2P are set to zero so that it will not be detected
+	again.
+
+	This algorithm can be expedited in a variety of ways.  First,
+	the central pixel is tested to see if it is one.  If not, the
+	aperture is moved to the next pixel.  This test corresponds to
+	the assertion that the night sky is dark, and that a substantial
+	number of pixels will be fail the detection threshold test.
+	Next, explicit logic tests for small blobs.  The logic contained
+	in exec/blob/find124_N tests for all radius one and two pixel events,
+	and special cases of 4 pixel events.  The routine exec/blob/find3_N
+	tests for all possible 3 pixel events.  These cases are worth
+	the effort because the apparent stellar luminosity function
+	tells us that the vast majority of stars in the catalog will be
+	faint (small), and that the processing for small blobs needs
+	to be optimized.
+
+	The processing is completed by examining the DN1P or DN2P image
+	with progressively larger apertures, until all blobs are
+	found or until an unreasonably large aperture is needed, which is
+	an indicator either that a very bright object is in the field or
+	there is something wrong with the image.  In all cases, blob
+	finding has been completed.
+
+	As the blobs are detected, the routine exec/blob/plproc_N attempts
+	to divide the blob into sub-blobs if required.  This is not a
+	true deconvolution because we have transmission and not intensity.
+	This routine is intended to separate almost distinct blobs found
+	in the outskirts of other blobs, and does not do a good job
+	splitting close double stars.  For the parameters used in UJ1.0,
+	the splitter is far too aggressive and tends to break up well
+	resolved objects into a series of distinct blobs.  This is an
+	area for algorithm development before beginning the scans of the
+	deep Survey plates.
+
+Once the list of blobs has been assembled, the TINY, SKY, DN1P, and DN2P
+are no longer used.  All further processing refers to the full resolution
+DATA image.  In addition, the code shifts from scaler to parallel operation
+because it can consider each blob as a separate entity.  Silicon Graphics
+implements parallel processing with the DOACROSS compiler directive
+for the pfa (Power FORTRAN Accelerator) compiler.  Its function is to
+assign the next step of the DO statement to the next available CPU.
+This algorithm is quite effective for processing stars because it means
+that a big, complicated star will occupy one CPU for a while, but the
+other CPUs can continue processing other stars.  Efficiencies between
+3.5 and 3.8 were seen on the 4 CPU 4D/440S computer.
+
+	b,c) Coarse and fine analysis are carried out sequentially by
+	exec/fsubs/multiproc.  The first step in done by exec/fsubs/proccenscan
+	which examines the blob along 8 rays and determines the size and
+	center of the blob.  Then, the blob is fit by a circularly
+	symmetric function by the routine exec/fsubs/marg and then various
+	other image description parameters (moments, gradient, lumpy,
+	etc.) are computed and packed into integers.
+
+	The function selected was B + A/(EXP(z)+1) where
+	z = c*((x-x0)**2 + (y-y0)**2 - r0**2).  (Perhaps this is more
+	familiar when called the Fermi-Dirac distribution function.)
+	Because the PMM uses transmitted light,  faint images look
+	something like a Gaussian, but bright images have flat tops because
+	they are saturated.  Hence, the desired fitting function needs to
+	transition between these two extremes in a smooth manner.  A large
+	number of numerical experiments were made, and they can be
+	summarized by the following points.
+
+		i) The production PMM code takes the sky value from
+		the median SKY image rather than letting it be a free
+		parameter in the fitting function.  The failure mode
+		for many normal and weird objects was found to be
+		an unreasonably large value for the sky and a correspondingly
+		tiny value for the amplitude.  Fixing the sky forces the
+		function to fit the image, and this is much more robust than
+		letting the sky be a fit parameter.
+
+		ii) Allowing the function to have different scale lengths
+		in X and Y was found to be numerically unstable for too
+		many stars.  With 6 free parameters in the exponent, chi
+		squared can be minimized by peculiar and bizarre combinations
+		that bear little resemblance to physical objects.
+
+		iii) Iteration could be terminated after 3 cycles without
+		serious damage.  If the object could be fit by the function,
+		convergence is rapid and the parameter estimators at the
+		end of the 3rd iteration were arbitrarily close to those
+		obtained after many more iterations.  If the object could not
+		be fit by the function, the parameters obtained after 3
+		iterations were just as weird as those obtained with
+		more iterations.
+
+		iv) The best image analysis debugging tool was to subtract
+		the fit from the DATA image and display the residuals
+		as the PMM is scanning.  This allows the human observer
+		to get a good understanding of the types of images that
+		are processed correctly, and where the analysis algorithm
+		fails.  This mode of operation is not possible on plate
+		measuring machines that do not fit the pixel data.
+
+	Therefore, a 5 parameter, circularly symmetric, fixed sky function
+	was fit to all detections, and the position determined by this
+	function is reported as the position of the object.
+
+	Since most other high speed photographic plate measuring machines
+	compute image moments, the PMM computes these as well.  Our
+	experience is that the image moments are less useful for star/galaxy
+	separation than quantities obtained from least squares fitting,
+	and the positions determined from the first image moments are
+	distinctly less accurate than those determined by the fit.
+	In addition, the image gradient, effective size, and a lumpiness
+	parameter are also computed since these may assist in star/galaxy
+	separation.  All parameters are packed into 13 integers by the
+	routine exec/fsubs/marg, and that code should be consulted for
+	information concerning the proper decoding of these values.
+
+D. Catalog Products
+
+The distribution of PMM data should begin and end with the distribution of
+the raw catalog files.  Unfortunately, cheap recording media are incompatible
+with the bulk.  So far, over 440 CD-ROMs are needed to store these data, and
+the scanning is not yet done.  Perhaps the digital video disk will make this
+problem go away.  Until them, the PMM program will attempt to generate
+useful catalogs that contain subsets of the parent database.
+
+   USNO-A:
+
+     These catalogs are intended to be used for astrometric reference.  They
+     contain only the position and brightness of objects, and ignore such
+     useful parameters as proper motion and star/galaxy classification.  These
+     are objects that measured well enough on each of two plates to pass the
+     spatial correlation test based on a 2-arcsecond entrance aperture.
+
+     V1.0 contains RA and Dec, and takes its astrometric calibration from
+     GSC1.1 and is photometric calibration from the Tycho Input Catalog and
+     from USNO CCD photometry.
+
+     V1.1 is derived from V1.0 by using SLALIB to transform RA/Dec to
+     Galactic L/B.  The catalog is arranged in zones of B and is sorted on L.
+     Because of intermediate storage requirements, the lookup tables between
+     V1.1 and the GSC will not be computed.
+
+     V2.0 is planned for late summer of 1997 after ESA releases the Hipparcos
+     and Tycho catalogs.  The astrometric calibration will be made with
+     respect to Tycho, and Tycho will be used to calibrate the bright end
+     of the photometry.  Should STScI release GSCP-II (or significant chunks
+     of it), this improved photometric calibration will be included, too.
+
+   USNO-B:
+
+     This catalog will extend USNO-A in several key areas.  It will contain
+     star/galaxy separation information and will contain proper motions.
+     Note that these quantities will be computed from J/F plate data, so
+     USNO-B will be incomplete in the north according to the production
+     schedule of POSS-II, and proper motions will be impossible south of
+     -42 due to missing second epoch survey data.  Proper motions in the
+     -36 and -42 zones can be computed from the Palomar Whiteoak extension.
+     In addition, the plan is to use spatial coincidence data from the
+     O+J and E+F survey comparisons to supplement the O+E requirement
+     needed by USNO-A.  Hence, there should be many more entries, and the
+     limiting magnitude for objects with peculiar colors will be much deeper.
+
+   UJ1.3 and beyond:
+
+      The UJ plates (3-minute IIIa-J on POSS-II field centers) provide a
+      useful set of astrometric standards at intermediate brightnesses.
+      To the extent possible, UJ will be kept current and made available
+      to those who request it.
+
+   Pixels:
+
+       The PMM pixel database is approaching 5 TBytes.  Each of the PMM
+       detections contains a pointer back to the frame and position of
+       the pixel that triggered the detection loop.  Current USNO policy
+       is to release the pixel database as soon as there is a reasonable
+       way to do so.  Users with a particular urgency can contact Dave
+       Monet and make a special request for access, but the logistics of
+       searching and retrieving a specific frame from the archive on 8-mm
+       tape will preclude all but the most important requests.

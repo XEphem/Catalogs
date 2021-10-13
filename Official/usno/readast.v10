@@ -1,0 +1,144 @@
+This is READ.AST, the file with the discussion of the astrometric calibration
+of USNO-A.  Please refer to READ.ME for an introduction to the catalog.
+
+Summary:
+
+   The astrometric calibration of USNO-A is based on the Space Telescope
+   Science Institute's Guide Star Catalog version 1.1, hereinafter GSC.
+   This is a temporary calibration, and it will be replaced with a
+   calibration to the European Space Agency's Hipparcos and Tycho catalogs
+   as soon as they become available (current estimate is June 1997).
+   We believe that a typical astrometric error is about 0.25 arcseconds,
+   but for stars a few magnitudes brighter than the plate limit and away
+   from the corners, the error may be as small as 0.15 arcseconds.
+   Coordinates are computed in the system of J2000 at the epoch of the
+   survey blue plate.  Proper motions were neither computed for nor
+   applied to the coordinates in this catalog.
+
+   Whenever possible, we have adopted Pat Wallace's SLALIB for computing
+   quantities associated with position and angle.  Details about these
+   routines and permission to use them should be obtained from the
+   author at ptw@star.rl.ac.uk.
+
+Source Code:
+
+     binary/acrs - projection of ACRS to survey plate coordinates
+     binary/ppm  -    "       "  PPM  "    "     "       "   "
+     binary/gscgen -  "       "  GSC  "    "     "       "   "
+     newbin/tychogen  "       "  Tycho Input Catalog "  " "  " "
+     binary/gsctaff -  Taff-o-grams for various surveys
+     binary/autogo - fit POSS-I O to projected GSC
+     binary/autoge -  "  POSS-I E "   "   "     "
+     binary/autogb -  "  SRC-J    "   "   "     "
+     binary/autogr -  "  ESO-R    "   "   "     "
+     catalog.tar - electronic version of the various plate logs
+     binary/ugapX - the various routines that make the catalog
+
+Strategy:
+
+     Using the reference catalog (GSC1.1) and the information contained
+     in the plate log (possi.cat and south.cat in catalog.tar), SLALIB
+     is used to compute the observed place for each catalog star.
+     The PMM coordinates are corrected for the nominal cubic distortion
+     of the Schmidt telescope (using SLALIB's SLA_PCD, etc.) and
+     compared to the projected catalog.  A best fit using up to cubic
+     terms is computed and the residuals are saved.  After doing this for
+     a significant number of plates, the residuals are binned according
+     to their location on the plate, and an approximation for the
+     systematic field distortion of the Schmidt telescope is determined.
+     (These are called Taff-o-grams in the code in recognition of Larry
+     Taff's demonstration of their significance.)  The fitting procedure
+     is repeated, this time including the systematic field distortion
+     map, and this fit is adopted for the generation of the catalog.
+
+The Individual Plate Solutions:
+
+     For a particular field, the plate log was consulted to get the
+     various parameters (date, time, emulsion, etc.) for the plate.
+     Unfortunately, there were a substantial number of typographical
+     errors in the original versions of these logs, and every effort
+     has been made to track down these errors and correct them.  We
+     believe that the versions contained in this CD-ROM set are more
+     accurate than the ones we started with, and all of the errors
+     that we could fix have been fixed.  With the exposure data,
+     SLALIB is used to compute the best estimator of where the stars
+     should be found.  In order, we used SLA_MAPQK, SLA_AOPQK, and
+     SLA_DS2TP to go from catalog to apparent to observed to tangent
+     plane coordinates.
+
+     The PMM produces coordinates for each detection in integer hundredths
+     of a micron on its focal plane.  Actually, there is a systematic problem
+     in the introduction of temperature and pressure into the PMM logic,
+     and its version of a micron can be off by as much as one part in
+     10^5, but they are sufficiently close to microns for this discussion.
+     The coordinates have had the individual platen zero points subtracted,
+     and the nominal center of each plate appears at approximately (170,175)
+     millimeters.  SLALIB provides a utility for removing the nominal
+     pin cushion distortion of a Schmidt telescope, and this correction
+     is applied to the raw PMM coordinates.
+
+     With the exception of systematic astrometric errors in the Schmidt
+     telescope, the projected catalog and undistorted PMM coordinates
+     ought to agree with each other.  The mapping is done using cubic
+     polynomials in X and Y, although linear terms are sufficient except
+     when doing the full-plate solution.  No sub-plate solutions are used:
+     a single fit in X and Y is used to describe the whole plate.  These
+     solutions are saved as are the residuals computed for each match between
+     the PMM and the reference catalog, and this process is repeated for
+     every survey plate.
+
+     When many solutions are available, the residuals are combined
+     according to the position of the object on the plate by the
+     code in binary/gsctaff.  For USNO-A, a mean distortion pattern
+     was computed for each of the three Schmidt telescopes involved.
+     However, it is clear from examination of subsets of the data that
+     there are significant differences in the shapes of the distortion pattern
+     as a function of zenith distance (actually declination but most survey
+     plates were taken near enough to the meridian).  In future releases,
+     we intend to use zonal versions of this correction.  The residuals
+     are binned in a 32x32 grid, and a 2-dimensional smoothing spline is
+     used to expand this to a 65x65 grid.  This corresponds to boxes
+     about 5 millimeters in size on the plate.
+
+     With the systematic correction determined, the astrometric solution
+     is repeated using the same catalog projection but adding the systematic
+     correction removal to the pin cushion distortion removal in the
+     pre-processing of PMM coordinates before fitting.  Again, a single
+     cubic fit in each coordinate is used to describe the entire plate.
+
+Assembling the Catalog:
+
+     Two separate astrometric fits go into each field.  First, the red
+     plate is mapped on to the blue plate, and then the blue plate is
+     mapped on to the reference catalog.  The code is complicated only
+     because of the large number of detections in each field, and the
+     importance of applying each fit in the proper order.  This process
+     is done in binary/ugap012, and extra software is inserted to verify
+     that each step worked properly.  The output of ugap012 is a set of
+     rings on the sky that follow from the surveys being taken in rings
+     of declination.  Because of the relatively slow response of our
+     CD-ROM jukebox that stores the raw catalogs, it takes about a week
+     to do this phase of the preparation of USNO-A.
+
+     The rings of various declinations are merged into zones of constant
+     width by the code in binary/ugap3.  The zones are examined for
+     duplicate detections by the code in binary/ugap4.  This program
+     makes a list of all entries to be removed (the TAGs) and saves
+     multiple observations of the same object in the sameXXXX.dat file
+     for the photometric calibration.  The important routine in ugap4
+     is nodup.f which finds the multiple detections.  For USNO-A, the
+     radius was taken to be 1 arcsecond.  In the polar regions, the
+     xynodup.f routine is used and the double detections are removed in
+     coordinates on the tangent plane, and a radius of 15 microns was used.
+     Finally, the code in binary/ugap5 removes the TAGged entries and
+     produces the final catalog.  This catalog incorporates the astrometric
+     calibration, but not the photometric calibration.  Routines to
+     check each step appear in binary/ugap3x, binary/ugap4x, and
+     binary/ugap5x.  A powerful debugging tool is plotting the entire
+     sky because the eye is very sensitive to systematic errors at plate
+     boundaries, etc.
+
+     Finally, the code in binary/ugap7 applies the photometric calibration,
+     and the code in binary/ugap8 projects the catalog in Galactic
+     coordinates.  The partition of the catalog files on the various
+     CD-ROMs is done in binary/ugap6.

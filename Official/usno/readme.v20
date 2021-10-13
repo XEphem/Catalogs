@@ -1,0 +1,353 @@
+****************Really Important Stuff**************************************
+
+1) This file is the first level of documentation for the USNO-A2.0 catalog.  It
+   discusses the changes between USNO-A2.0 and USNO-A1.0, and familiarity with
+   USNO-A1.0 is presumed.  Should this not me the case, please start by reading
+   the A1.0 documentation (README.V10 and associated files) before continuing
+   with this file.  Questions and comments should be directed to
+
+   Dave Monet
+   US Naval Observatory Flagstaff Station
+   PO Box 1149  (US Mail Only)
+   West Highway 66  (FedEx, UPS, etc.)
+   Flagstaff AZ 86001 USA
+
+   Voice: 520-779-5132
+   FAX:   520-774-3626
+   e-mail:  dgm@nofs.navy.mil
+
+   Please understand that the level of support provided will be commensurate
+   with the level of effort expended.  I am too busy to do your homework
+   for you.  E-mail works better than the phone.
+
+2) If you have been using USNO-A1.0, all you really need to do is swap
+   the new versions of the .ACC and .CAT files for the old ones.  If
+   you insist on understanding what has changed, you can read the rest
+   of the documentation, but the new version is intended to be as
+   compatible as possible with the old one.
+
+3) This file is subject to being updated.  We are in the process of moving
+   the USNO Flagstaff Station Web site from
+       http://www.usno.navy.mil/nofs
+   to
+       http://www.nofs.navy.mil
+   Please be patient during the transition.  This version of the file
+   was all that I could prepare in time for the CD-ROM distribution.
+   As changes, mistakes, and additions are processed, the new version
+   of this file will be available from our Web site.
+
+*********************The Rest Of The Stuff********************************
+
+                    USNO-A V2.0
+              A Catalog of Astrometric Standards
+                   David Monet a)
+
+	Alan Bird a), Blaise Canzian a), Conard Dahn a), Harry Guetter a),
+	Hugh Harris a), Arne Henden b), Stephen Levine a),
+	Chris Luginbuhl a), Alice K. B. Monet a), Albert Rhodes a),
+	Betty Riepe a), Steve Sell a), Ron Stone a), Fred Vrba a),
+	Richard Walker a)
+
+a) U.S. Naval Observatory Flagstaff Station (USNOFS)
+b) Universities Space Research Association (USRA) stationed at USNOFS.
+
+============== Abstract =======================
+
+   USNO-A2.0 is a catalog of 526,280,881 stars, and is based on a
+   re-reduction of the Precision Measuring Machine (PMM) scans that
+   were the basis for the USNO-A1.0 catalog.  The major difference
+   between A2.0 and A1.0 is that A1.0 used the Guide Star Catalog
+   (Lasker et al. 1986) as its reference frame whereas A2.0 uses the
+   ICRF as realized by the USNO ACT catalog (Urban et al. 1997).
+
+   A2.0 presents right ascension and declination (J2000, epoch of the
+   mean of the blue and red plate) and the blue and red magnitude
+   for each star.  Usage of the ACT catalog as well as usage of new
+   astrometric and photometric reduction algorithms should provide
+   improved astrometry (mostly in the reduction of systematic errors)
+   and improved photometry (because the brightest stars on each plate
+   had B and V magnitudes measured by the Tycho experiment on the Hipparcos
+   satellite).  The basic format of the catalog and its compilation is the
+   same as for A1.0, and most users should be able to migrate to this
+   newer version with minimal effort.
+
+   This file contains a discussion of the differences between A1.0 and
+   A2.0, and those points not discussed remain unchanged.  For convenience,
+   the documents circulated with the A1.0 catalog are included in this
+   distribution.
+
+================= Discussion =========================
+
+1.  REFERENCE FRAME
+
+   USNO-A2.0 has adopted the ICRS as its reference frame, and uses
+   the ACT catalog (Urban et al. 1997) for its astrometric reference
+   catalog.  The Hipparcos satellite established the ICRS at optical
+   wavelengths, but stars in the Hipparcos catalog are saturated on
+   deep Schmidt survey plates as are the brighter Tycho catalog stars.
+   Fortunately, the fainter Tycho stars have measurable images, so each
+   survey plate can be directly tied to the ICRS without an intermediate
+   astrometric reference frame.  The proper motions contained in the
+   ACT catalog are more accurate than those in the Tycho catalog, so
+   the ACT was adopted as the reference catalog.  USNO-A1.0 use the Guide
+   Star Catalog v1.1 as its astrometric reference catalog, and the
+   availability of the ACT was the driving force behind the compilation
+   of USNO-A2.0.
+
+2.  STAR NAMES
+
+   USNO-A2.0 continues the policy established for USNO-A1.0 of not
+   assigning an arbitrary name to each object.  Without explicit star
+   names, the IAU recommendation is to use the coordinates for the name.
+   Since USNO-A2.0 contains a complete astrometric rereduction, the
+   coordinates of objects are not the same, so the names for USNO-A1.0
+   stars are NOT PRESERVED in USNO-A2.0.  If you need a name for a star,
+   you can use either the coordinates or the zone and offset so long
+   as you are careful to cite USNO-A2.0 as the source.
+
+   (If anybody has a clever solution to the problem of star names that
+   does not waste lots of space or CPU cycles, please let me know.)
+
+3.  PHOTOMETRIC CALIBRATION
+
+   The Tycho catalog provides B and V magnitudes for its stars.  USNO-A2.0
+   uses these and Henden's photometric conversion tables between (B,V)
+   and (O+E+J+F) to set the bright end of the photometric calibration for
+   each plate.  This is an improvement over USNO-A1.0.
+
+   Unfortunately, GSPC-II and other large catalogs of faint photometric
+   standards are not available, so the faint end of the photometric
+   calibration came from the USNO CCD parallax fields in the North,
+   and from the Yale Southern Proper Motion CCD calibration fields
+   (van Altena et al. 1998) for fields near the South Galactic pole.
+   Hence, the faint photometric calibration of USNO-A2.0 may not be
+   any better than for USNO-A1.0.  Sorry.  When better sources of faint
+   photometric calibration data become available, new versions of USNO-A
+   will be compiled.
+
+   A new algorithm for doing computing the photometric calibration.
+
+     a) Since there are 300 or more ACT(==Tycho) stars on each plate,
+        the computed J+F+O+E magnitude for each star can be computed
+        from B+V.  Given the relatively poor nature of this conversion,
+        subtleties of the various photometric systems were ignored.
+        Please remember that all Tycho stars are toasted on deep Schmidt
+        plates, and we were lucky that PMM could compute decent positions
+        and brightnesses for any of them.  Four solutions were done
+        (O+E+J+F) which fit an offset for each plate and a common
+        slope for all plates.  For example, there were 825 free parameters
+        in the solution for the 824 POSS-I O plates, 824 offsets and 1 slope.
+        This solution isn't quite as good as fitting individual slopes
+        for "good" plates, but is much more stable than fitting individual
+        slopes for "bad" plates.
+
+     b) There are 215 POSS fields and 42 SERC/ESO fields with faint
+        faint photometric standards.  Again, the ensemble of plates was
+        divided into 4 solutions (O+E+J+F), and the fit allowed an
+        offset for each plate but a common value for the linear and the
+        quadratic term.  For example, there were 217 free parameters in
+        the POSS-I O plate solution, 215 offsets, 1 slope, and 1 quadratic
+        term.  Again, this offers stability at the expense of accuracy
+        on the "good" plates.
+
+     c) A number of iterative solutions for using the calibrated plates
+        to calibrate the rest were tried, and most failed.  Finally,
+        a stable solution was found.  For each of the 4 sets of plates,
+        the faint zero points were fit as a function of the bright
+        zero points.  Using this relationship, the faint zero points for
+        all plates were computed.  (We chose to use the fit instead of the
+        individual solutions for those plates which had the faint
+        photometric standards.)  Note that this relationship provided
+        the fifth (and final) parameter for the photometric calibration
+        (i. e., bright offset, bright slope, faint offset, faint slope,
+        faint quadratic).
+
+        Once the coefficients were known for all plates, the overlap
+        zones on adjacent plates were used to smooth the solution over
+        the whole sky.  In an iterative scheme, the faint mean error
+        for each plate was computed from all stars in common with other
+        plates, and then the faint offset was adjusted after all the
+        mean errors were computed.  This algorithm converged in 3 or 4
+        iterations, and makes the plate-to-plate photometry as uniform
+        as possible given the paucity of faint standards.
+
+     d) No vignetting function was used.
+
+4.  ASTROMETRIC CALIBRATION
+
+   A startling result of the comparison between PMM and ACT is that
+   decent astrometry can be done on stars as bright as about 11th magnitude.
+   Visually, these images have spikes and ghosts, and are not the sort of
+   images commonly associated with the word "astrometry".  Since there
+   are 300 or more ACT stars on a single Schmidt plate, each plate
+   can be tied directly to the reference catalog without an intermediate
+   coordinate system.  This solution includes corrections for systematic
+   errors in the focal plane and for magnitude equation, and these
+   are discussed below.  It should be emphasized that the raw measures
+   are the same for USNO-A2.0 and USNO-A1.0, and the difference is in
+   how these are combined to produce the coordinates found in the catalog.
+
+   a) Schmidt telescopes have field-dependent astrometric errors, and
+      these must be sensed and removed.  Because there are hundreds of
+      reference stars on each plate, the algorithm used was as follows.
+      Data from the exposure log are used to do the transformation from
+      mean to apparent to observed to tangent plane coordinates using
+      the relevant routines from Pat Wallace's SLALIB package.  The
+      first set of solutions finds the best cubic solution between the
+      PMM measures (corrected for the known Schmidt telescope pin cushion
+      distortion) and the predicted positions.  Once an ensemble of these
+      solutions have been done, the residuals are accumulated in 5mm by
+      by 5mm boxes of position on the plate.  By combining the residuals
+      from hundreds of plates, the systematic pattern can be determined
+      with good precision.  The second step is to repeat the cubic fit
+      between predicted and observed positions after correcting the
+      observed positions using the pattern determined in the first step.
+      Examination of the systematic pattern produced by the second
+      step indicated that there was a small residual pattern that arose
+      from the interdependence of the fixed pattern and the cubic
+      polynomial fit.  A third iteration was done, and the resulting
+      systematic pattern was consistent with random noise.
+
+      The iterative process of determining the systematic pattern of
+      astrometric distortions was done separately for each telescope
+      in each color, and intermediate solutions based on zones of
+      declination were examined for the effects of gravitational
+      deflection.  None were found, so the final patterns were determined
+      through the co-addition of all plates taken by a particular telescope
+      in a particular color.  Hence, USNO-A2.0 uses 4 specific patterns
+      instead of the single mean pattern used for USNO-A1.0.
+
+   b) Inspection of the astrometric residuals from high declination
+      fields (where the overlop between plates is large) showed that
+      there was a significant radial pattern.  This, and the analysis
+      of the residuals from the UJ reductions for the USNO-B catalog,
+      suggested that magnitude equation was present.  This is hardly
+      a surprise because the images of Tycho stars show spikes, ghosts,
+      and other problems whereas the faint stars show relatively clean
+      images.  The effect is small to non-existent within a radius of ~2.2
+      degrees of the center, and then rises to 1.0 arcsecond at ~3.0
+      degrees and continues to rise into the corners.  The effect is
+      more or less the same for the POSS-I O, POSS-I E, and SERC-J plates,
+      but a different behavior was seen for the ESO-R plates.  The
+      source of this different behavior is not understood, and may
+      indicate a software problem associated with the different size of the
+      ESO plates (300x300 mm vs 14x14 in).
+
+      The analysis of the UJ plates (like POSS-II J except with a 3 minute
+      exposure) shows a similar behavior when the Tycho stars are subdivided
+      into bins of <9, 9, 10, 11, and 12 magnitude.  Since the nominal
+      difference between UJ and POSS-I is something like 4 magnitudes,
+      the effect was assumed to be zero for stars fainter than 15 and
+      rises linearly until it becomes the same for all stars brighter
+      than 11.  This is an empirical correction, and more work needs to be
+      done to verify its behavior.
+
+5.  NUMERICAL REFOCUS
+
+   The most common mode for the PMM to mis-measure a plate is that it
+   does not determine the distance between the camera and the plate
+   accurately.  The PMM starts by using the granularity of the emulsion
+   as a signal for setting the focus (i.e., minimum background smoothness),
+   and then does 15 exposures separated by 0.5 millimeters to compute
+   the actual pixels per millimeter.  In many cases, this algorithm is
+   not sufficient, and the raw scans have relatively large astrometric
+   errors, and show a sawtooth pattern in the residuals.
+
+   Since PMM saves many more data than are contained in this catalog,
+   it is possible to refocus the plate after the scan.  To do this, the
+   known positions of the ACT stars are fit as a function of the new
+   Z distance between the camera and the plate.  Minimization of these
+   residuals indicates what the proper focus should have been, and then
+   the entire set of raw measures are corrected for this effect.  In
+   general, this processed tightens the histogram of the number of plates
+   as a function of the astrometric error.  The good scans are unaffected
+   but the bad scans get better.  This algorithm has been applied to all
+   plates used in USNO-A2.0.
+
+6.  EPOCH OF COORDINATES
+
+   In USNO-A1.0, the coordinates were computed from the positions measured
+   on the blue plate (O or J), so they were J2000 at the epoch of the
+   blue plate.  For USNO-A2.0, we believe that the uncertainties in the
+   positions are no longer dominated by systematic errors, so it makes
+   sense to average the blue and red positions.  Hence, USNO-A2.0 coordinates
+   are J2000 at the epoch of the mean of the blue and red exposure.  For
+   POSS-I plates, this difference is trivial because the plates were taken
+   on the same night.  For SERC-J and ESO-R, there can be a significant
+   epoch difference between the blue and red plate, and stars with small
+   proper motions will be affected.  Note that stars with large proper
+   motions will be selectively deleted from the SERC-J+ESO-R portion
+   of the sky because they will fail the test of blue and red positions
+   within a 2 arcsec radius, and that this omission depends on the
+   epoch difference of the plates for the individual fields.
+
+
+7.  MULTIPLE ENTRIES
+
+   We have done our best to remove multiple entries of the same star, but
+   they still remain.  The improved astrometric reduction decreased the
+   number of stars in the catalog by about 0.8% (about 4 million stars),
+   but this reduction is masked by the increase in the number of stars
+   associated with moving the north/south transition from about -33 degrees
+   to about -17.5 degrees.  In the north/south overlap zone, double
+   entries are generated for stars with large proper motions since if
+   they were detected in each survey separately but moved far enough
+   to escape the double detection removal algorithm.  There shouldn't
+   be too many of these, but they may be obvious because they are
+   statistically brighter than the typical catalog entry.
+
+8.  BRIGHT STARS
+
+   Images for stars brighter than about 11th magnitude are so difficult to
+   measure that their computed positions may differ with the correct
+   position by more than the 2 arcsecond coincidence radius used in the
+   reductions.  For really bright stars, all that appears are an ensemble
+   of spurious detections associated with diffraction spikes, halos, and
+   ghosts.  To make USNO-A2.0 a useful catalog, bright stars were inserted
+   into it so that the catalog is a better representation of the optical
+   sky.  For may applications, it is better to know that a bright star
+   is nearby than it is to insist that the poorly measured objects be
+   deleted from the catalog.  In compiling USNO-A2.0, a list of all
+   ACT stars that were correlated with PMM detections was kept.  For
+   these stars, USNO-A2.0 contains the PMM position, not the ACT position,
+   and the flag bit is set to indicate the correlation.  In the compilation
+   process, all uncorrelated ACT stars were inserted into the catalog
+   using the ACT coordinates.  However, ACT is not complete at the bright
+   end because it omits stars with low astrometric quality.  Hence,
+   a final pass inserted all Tycho stars that do not appear in the ACT
+   catalog at the Tycho position.  According to the documents published
+   with the Tycho catalog, every effort was made to make it complete at
+   the bright end, even for stars with low astrometric quality.
+
+   Note that one should not use the coordinates of ACT and Tycho stars
+   presented in USNO-A2.0 for critical applications.  ACT stars appear
+   at the epoch of the plate, but because the proper motions for the
+   non-ACT Tycho stars are unreliable, these stars appear at the epoch
+   of the Tycho catalog.
+
+9.  PRETTY PICTURES
+
+   The all-sky pretty pictures generated from USNO-A2.0 used an algorithm
+   to reduce the over-density of southern stars that arises from the fainter
+   limiting magnitudes of the SERC-J and ESO-R plates.  This was done
+   by using a random number generator and omitting the star if the
+   random number was less than 0.45.  That is to say, the southern
+   over-density is not quite a factor of 2 more objects per unit area
+   than found from the northern surveys.  Again, all objects are in
+   USNO-A2.0 and the over-density was removed to make the pretty pictures.
+
+11.  SOURCE CODE
+
+   As with USNO-A1.0, we have published the source code for all computations
+   and for all calibration.  The compilation code is in ALPHA13.TAR in
+   the directories ./newbin/procN.  The code for the numerical refocus
+   is in NEWBIN.TAR ./newbin/newz0 and for the fixed pattern removal
+   in ./newbin/tycho2xtaff.
+
+   The code is published as a service to those who wish to understand
+   USNO-A2.0 and not so that we can be ripped off.  Please respect the
+   intellectual property rights contained in the source code, and
+   do not make us wake up the lawyers.
+
+Enjoy!  If you use USNO-A2.0 for neat stuff, drop me an e-mail.
+-Dave
