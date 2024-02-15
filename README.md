@@ -29,4 +29,16 @@ Three catalogs have been contributed by Steve Mencinsky:
 * `SMC.edb` — a list of deep sky objects in the Magellanic Clouds.
 
 * `recons100.edb` — is the complete census as of January 1, 2000, of
-  objects outside our solar system known within 10 parsecs.
+  objects outside our solar system known within 10 parsecs. Updated
+  (and syntax errors removed) by Richard Mathar to the status of Jan. 1 2012.
+
+Three updates contributed by Richard Mathar:
+
+* `AstLowell.edb` is an update of the old variant
+  of the Lowell asteroids of the Official directory to Jan 2024.
+
+* `AstMPD.edb` is an update of the old variant of the MPC asteroids
+  to Jan 2024.
+
+* `xephem_sites3` is the MPC list of observatory codes as of Feb 2024.
+
